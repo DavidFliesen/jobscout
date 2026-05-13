@@ -38,9 +38,9 @@ body::after {
 .wrapper {
   position: relative;
   z-index: 1;
-  max-width: 1100px;
+  max-width: 1600px;
   margin: 0 auto;
-  padding: 20px 16px 60px;
+  padding: 30px 40px 80px;
 }
 
 .header {
@@ -56,7 +56,7 @@ body::after {
 
 .header-left h1 {
   font-family: 'Orbitron', sans-serif;
-  font-size: clamp(1.4rem, 4vw, 2.2rem);
+  font-size: clamp(2rem, 4vw, 3.2rem);
   font-weight: 900;
   color: #ffb300;
   letter-spacing: 0.12em;
@@ -66,7 +66,7 @@ body::after {
 
 .header-left .subtitle {
   font-family: 'Share Tech Mono', monospace;
-  font-size: 0.7rem;
+  font-size: 1rem;
   color: #c47f00;
   letter-spacing: 0.2em;
   margin-top: 4px;
@@ -74,7 +74,7 @@ body::after {
 
 .header-right {
   font-family: 'Share Tech Mono', monospace;
-  font-size: 0.65rem;
+  font-size: 0.9rem;
   color: #8a7a5a;
   text-align: right;
   line-height: 1.8;
@@ -93,12 +93,12 @@ body::after {
 .panel-header {
   background: #16161c;
   border-bottom: 1px solid rgba(255,179,0,0.25);
-  padding: 10px 16px;
+  padding: 14px 20px;
   display: flex;
   align-items: center;
   gap: 10px;
   font-family: 'Orbitron', sans-serif;
-  font-size: 0.65rem;
+  font-size: 0.9rem;
   font-weight: 600;
   color: #ffb300;
   letter-spacing: 0.2em;
@@ -114,7 +114,7 @@ body::after {
 .dot.red { background: #ff3b3b; box-shadow: 0 0 8px #ff3b3b; }
 .dot.green { background: #39ff6e; box-shadow: 0 0 8px #39ff6e; }
 
-.panel-body { padding: 16px; }
+.panel-body { padding: 22px; }
 
 .config-grid {
   display: grid;
@@ -137,9 +137,9 @@ body::after {
   gap: 6px;
   background: rgba(255,179,0,0.05);
   border: 1px solid rgba(255,179,0,0.25);
-  padding: 4px 10px;
+  padding: 8px 14px;
   font-family: 'Share Tech Mono', monospace;
-  font-size: 0.65rem;
+  font-size: 0.9rem;
   color: #ffb300;
   letter-spacing: 0.05em;
 }
@@ -168,8 +168,8 @@ input[type="text"] {
   border: 1px solid rgba(255,179,0,0.25);
   color: #e8d9b0;
   font-family: 'Share Tech Mono', monospace;
-  font-size: 0.7rem;
-  padding: 8px 12px;
+  font-size: 0.95rem;
+  padding: 12px 16px;
   outline: none;
   transition: border-color 0.2s;
 }
@@ -178,10 +178,10 @@ input[type="text"]::placeholder { color: #8a7a5a; }
 
 .btn {
   font-family: 'Orbitron', sans-serif;
-  font-size: 0.6rem;
+  font-size: 0.8rem;
   font-weight: 600;
   letter-spacing: 0.15em;
-  padding: 8px 14px;
+  padding: 10px 18px;
   border: 1px solid;
   cursor: pointer;
   transition: all 0.2s;
@@ -203,10 +203,10 @@ input[type="text"]::placeholder { color: #8a7a5a; }
   border-color: #ffb300;
   color: #0a0a0c;
   font-family: 'Orbitron', sans-serif;
-  font-size: 0.75rem;
+  font-size: 1rem;
   font-weight: 600;
   letter-spacing: 0.15em;
-  padding: 14px 32px;
+  padding: 20px 40px;
   display: block;
   width: 100%;
   text-align: center;
@@ -234,7 +234,7 @@ input[type="text"]::placeholder { color: #8a7a5a; }
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 8px 12px;
+  padding: 12px 16px;
   background: #0a0a0c;
   border: 1px solid rgba(255,179,0,0.25);
   cursor: pointer;
@@ -254,7 +254,7 @@ input[type="text"]::placeholder { color: #8a7a5a; }
 
 .pref-label {
   font-family: 'Share Tech Mono', monospace;
-  font-size: 0.65rem;
+  font-size: 0.9rem;
   color: #8a7a5a;
   line-height: 1.3;
 }
@@ -262,9 +262,9 @@ input[type="text"]::placeholder { color: #8a7a5a; }
 
 #status-bar {
   font-family: 'Share Tech Mono', monospace;
-  font-size: 0.68rem;
+  font-size: 0.9rem;
   color: #c47f00;
-  padding: 10px 16px;
+  padding: 14px 20px;
   border-top: 1px solid rgba(255,179,0,0.25);
   min-height: 36px;
   display: flex;
@@ -304,11 +304,11 @@ input[type="text"]::placeholder { color: #8a7a5a; }
   background: #16161c;
   border-bottom: 1px solid rgba(255,179,0,0.25);
   font-family: 'Share Tech Mono', monospace;
-  font-size: 0.65rem;
+  font-size: 0.9rem;
   color: #8a7a5a;
 }
 
-.results-meta .count { color: #ffb300; font-size: 0.8rem; }
+.results-meta .count { color: #ffb300; font-size: 1rem; }
 
 .job-card {
   border-bottom: 1px solid rgba(255,179,0,0.1);
@@ -329,7 +329,7 @@ input[type="text"]::placeholder { color: #8a7a5a; }
 
 .job-title {
   font-family: 'Orbitron', sans-serif;
-  font-size: 0.85rem;
+  font-size: 1.1rem;
   font-weight: 600;
   color: #ffb300;
   letter-spacing: 0.05em;
@@ -338,16 +338,16 @@ input[type="text"]::placeholder { color: #8a7a5a; }
 
 .job-company {
   font-family: 'Share Tech Mono', monospace;
-  font-size: 0.65rem;
+  font-size: 0.9rem;
   color: #00cfff;
   margin-top: 2px;
 }
 
 .score-badge {
   font-family: 'Orbitron', sans-serif;
-  font-size: 0.6rem;
+  font-size: 0.8rem;
   font-weight: 900;
-  padding: 4px 10px;
+  padding: 6px 14px;
   border: 1px solid;
   letter-spacing: 0.15em;
   white-space: nowrap;
@@ -366,7 +366,7 @@ input[type="text"]::placeholder { color: #8a7a5a; }
 
 .job-meta-item {
   font-family: 'Share Tech Mono', monospace;
-  font-size: 0.6rem;
+  font-size: 0.85rem;
   color: #8a7a5a;
   display: flex;
   align-items: center;
@@ -382,8 +382,8 @@ input[type="text"]::placeholder { color: #8a7a5a; }
 }
 .job-skill-tag {
   font-family: 'Share Tech Mono', monospace;
-  font-size: 0.55rem;
-  padding: 2px 8px;
+  font-size: 0.78rem;
+  padding: 4px 10px;
   background: rgba(0,207,255,0.06);
   border: 1px solid rgba(0,207,255,0.2);
   color: #00cfff;
@@ -396,7 +396,7 @@ input[type="text"]::placeholder { color: #8a7a5a; }
 }
 
 .job-summary {
-  font-size: 0.85rem;
+  font-size: 1rem;
   font-weight: 300;
   color: #e8d9b0;
   line-height: 1.6;
@@ -405,7 +405,7 @@ input[type="text"]::placeholder { color: #8a7a5a; }
 
 .job-why {
   font-family: 'Share Tech Mono', monospace;
-  font-size: 0.62rem;
+  font-size: 0.88rem;
   color: #c47f00;
   border-left: 2px solid #c47f00;
   padding-left: 10px;
@@ -421,10 +421,10 @@ input[type="text"]::placeholder { color: #8a7a5a; }
 
 .job-link {
   font-family: 'Orbitron', sans-serif;
-  font-size: 0.55rem;
+  font-size: 0.78rem;
   font-weight: 600;
   letter-spacing: 0.12em;
-  padding: 5px 12px;
+  padding: 8px 16px;
   border: 1px solid rgba(255,179,0,0.25);
   color: #8a7a5a;
   text-decoration: none;
@@ -446,11 +446,11 @@ input[type="text"]::placeholder { color: #8a7a5a; }
 }
 
 .intel-summary {
-  font-size: 0.9rem;
+  font-size: 1.05rem;
   font-weight: 300;
   color: #e8d9b0;
   line-height: 1.7;
-  padding: 16px;
+  padding: 20px;
   border-left: 3px solid #ffb300;
   background: rgba(255,179,0,0.05);
   margin: 0 16px 16px;
@@ -463,10 +463,10 @@ input[type="text"]::placeholder { color: #8a7a5a; }
   border: 1px solid rgba(255,179,0,0.25);
   padding: 14px;
   font-family: 'Share Tech Mono', monospace;
-  font-size: 0.62rem;
+  font-size: 0.85rem;
   color: #8a7a5a;
   line-height: 1.7;
-  max-height: 300px;
+  max-height: 400px;
   overflow-y: auto;
   margin: 0 16px 16px;
   white-space: pre-wrap;
@@ -474,7 +474,7 @@ input[type="text"]::placeholder { color: #8a7a5a; }
 
 .toggle-raw {
   font-family: 'Share Tech Mono', monospace;
-  font-size: 0.6rem;
+  font-size: 0.85rem;
   color: #8a7a5a;
   cursor: pointer;
   background: none;
@@ -492,7 +492,7 @@ input[type="text"]::placeholder { color: #8a7a5a; }
   gap: 12px;
   margin: 20px 0;
   font-family: 'Share Tech Mono', monospace;
-  font-size: 0.6rem;
+  font-size: 0.85rem;
   color: #8a7a5a;
   letter-spacing: 0.15em;
 }
@@ -505,10 +505,10 @@ input[type="text"]::placeholder { color: #8a7a5a; }
 
 .disclaimer {
   font-family: 'Share Tech Mono', monospace;
-  font-size: 0.6rem;
+  font-size: 0.85rem;
   color: #8a7a5a;
   text-align: center;
-  padding: 12px;
+  padding: 16px;
   border-top: 1px solid rgba(255,179,0,0.25);
   line-height: 1.6;
 }
@@ -541,7 +541,7 @@ input[type="text"]::placeholder { color: #8a7a5a; }
 
 .loading-text {
   font-family: 'Share Tech Mono', monospace;
-  font-size: 0.7rem;
+  font-size: 1rem;
   color: #c47f00;
   letter-spacing: 0.15em;
 }
@@ -551,7 +551,7 @@ input[type="text"]::placeholder { color: #8a7a5a; }
   margin-top: 8px;
   color: #8a7a5a;
   font-family: 'Share Tech Mono', monospace;
-  font-size: 0.62rem;
+  font-size: 0.9rem;
   animation: blink 1.2s step-end infinite;
 }
 @keyframes blink { 50% { opacity: 0; } }
@@ -576,7 +576,7 @@ input[type="text"]::placeholder { color: #8a7a5a; }
 <div class="panel" id="backend-panel">
   <div class="panel-header"><span class="dot green"></span> BACKEND CONFIG // NGROK PROXY URL</div>
   <div class="panel-body">
-    <div style="font-family:'Share Tech Mono',monospace;font-size:0.65rem;color:#8a7a5a;margin-bottom:10px;">
+    <div style="font-family:'Share Tech Mono',monospace;font-size:0.9rem;color:#8a7a5a;margin-bottom:14px;">
       One-time setup: paste your Render.com service URL below and click SAVE. It never changes, so you only do this once.
     </div>
     <div class="input-row">
@@ -584,7 +584,7 @@ input[type="text"]::placeholder { color: #8a7a5a; }
       <button class="btn btn-amber" onclick="saveProxyUrl()">SAVE URL</button>
       <button class="btn btn-amber" onclick="testProxy()" style="border-color:#00cfff;color:#00cfff;">TEST</button>
     </div>
-    <div id="proxy-status" style="font-family:'Share Tech Mono',monospace;font-size:0.62rem;color:#8a7a5a;margin-top:8px;min-height:18px;"></div>
+    <div id="proxy-status" style="font-family:'Share Tech Mono',monospace;font-size:0.88rem;color:#8a7a5a;margin-top:10px;min-height:22px;"></div>
   </div>
 </div>
 
