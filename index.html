@@ -764,7 +764,7 @@ input[type="text"]::placeholder { color: #aab4c4; }
 </div>
 <script>
 var DEFAULTS = {
-  companies: ['Adobe', 'OpenAI', 'Anthropic', 'Google', 'Microsoft', 'NVIDIA', 'Meta AI', 'Boeing', 'Newport News Shipbuilding HII', 'Northwestern Mutual', 'Onebrief (BattleRoad)', 'Tidewater Technical College'],
+  companies: ['Adobe', 'OpenAI', 'Anthropic', 'Google', 'Microsoft', 'NVIDIA', 'Meta AI', 'Boeing', 'Newport News Shipbuilding HII', 'Northwestern Mutual', 'Onebrief BattleRoad', 'Tidewater Technical College'],
   skills: ['Generative AI', 'LLM', 'Multimedia', 'Python', 'FastAPI', 'Creative Technology', 'Computer Vision', 'Prompt Engineering'],
   locations: ['Remote', 'Summerville SC', 'North Charleston SC', 'Goose Creek SC', 'Charleston SC'],
   prefs: {
@@ -858,20 +858,7 @@ function renderSources() {
   });
 }
 
-window.onload = function() {
-  renderTags('company');
-  renderTags('skill');
-  renderTags('location');
-  renderPrefs();
-  renderSources();
-  var savedUrl = localStorage.getItem('cibola_proxy_url') || '';
-  var proxyInput = document.getElementById('proxy-input');
-  if (proxyInput && savedUrl) {
-    proxyInput.value = savedUrl;
-    document.getElementById('proxy-status').style.color = '#8a5c00';
-    document.getElementById('proxy-status').textContent = 'BACKEND URL LOADED // ' + savedUrl;
-  }
-};
+/* window.onload moved to end */
 
 
 function saveProxyUrl() {
@@ -1385,6 +1372,21 @@ function toggleRaw() {
   log.style.display = log.style.display === 'block' ? 'none' : 'block';
 }
 
+
+window.onload = function() {
+  renderTags('company');
+  renderTags('skill');
+  renderTags('location');
+  renderPrefs();
+  renderSources();
+  var savedUrl = localStorage.getItem('cibola_proxy_url') || '';
+  var proxyInput = document.getElementById('proxy-input');
+  if (proxyInput && savedUrl) {
+    proxyInput.value = savedUrl;
+    document.getElementById('proxy-status').style.color = '#8a5c00';
+    document.getElementById('proxy-status').textContent = 'BACKEND URL LOADED // ' + savedUrl;
+  }
+};
 
 </script>
 </body>
