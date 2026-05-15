@@ -3,49 +3,29 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CIBOLA JOB SCOUT // Mission Control</title>
+<title>JOB SCOUT // Mission Control</title>
 <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;600;900&family=Rajdhani:wght@300;400;600&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/docx/8.5.0/docx.umd.min.js"></script>
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
 body {
-  background: #0a0a0c;
-  color: #e8d9b0;
+  background: #f0f4f8;
+  color: #1a2332;
   font-family: 'Rajdhani', sans-serif;
   min-height: 100vh;
   overflow-x: hidden;
 }
 
-body::before {
-  content: '';
-  position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.08) 2px, rgba(0,0,0,0.08) 4px);
-  pointer-events: none;
-  z-index: 9999;
-}
-
-body::after {
-  content: '';
-  position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background-image: linear-gradient(rgba(255,179,0,0.04) 1px, transparent 1px), linear-gradient(90deg, rgba(255,179,0,0.04) 1px, transparent 1px);
-  background-size: 40px 40px;
-  pointer-events: none;
-  z-index: 0;
-}
-
 .wrapper {
   position: relative;
-  z-index: 1;
   max-width: 1600px;
   margin: 0 auto;
   padding: 30px 40px 80px;
 }
 
 .header {
-  border-bottom: 2px solid #ffb300;
+  border-bottom: 3px solid #1a3fa8;
   padding-bottom: 16px;
   margin-bottom: 24px;
   display: flex;
@@ -59,61 +39,60 @@ body::after {
   font-family: 'Orbitron', sans-serif;
   font-size: clamp(2rem, 4vw, 3.2rem);
   font-weight: 900;
-  color: #ffb300;
-  letter-spacing: 0.12em;
-  text-shadow: 0 0 20px #c47f00;
+  color: #1a3a6b;
+  letter-spacing: 0.1em;
   line-height: 1;
 }
 
 .header-left .subtitle {
   font-family: 'Share Tech Mono', monospace;
-  font-size: 1rem;
-  color: #c47f00;
-  letter-spacing: 0.2em;
-  margin-top: 4px;
+  font-size: 0.95rem;
+  color: #3b6fd4;
+  letter-spacing: 0.18em;
+  margin-top: 6px;
 }
 
 .header-right {
   font-family: 'Share Tech Mono', monospace;
-  font-size: 0.9rem;
-  color: #8a7a5a;
+  font-size: 0.88rem;
+  color: #4a5568;
   text-align: right;
   line-height: 1.8;
 }
 
-#live-clock { color: #ffb300; }
+#live-clock { color: #1a3fa8; font-weight: bold; }
 
 .panel {
-  background: #101014;
-  border: 1px solid rgba(255,179,0,0.25);
-  border-radius: 2px;
+  background: #ffffff;
+  border: 1px solid #c3d4ee;
+  border-radius: 6px;
   margin-bottom: 20px;
   overflow: hidden;
+  box-shadow: 0 2px 8px rgba(26,86,219,0.06);
 }
 
 .panel-header {
-  background: #16161c;
-  border-bottom: 1px solid rgba(255,179,0,0.25);
+  background: #e4ecf8;
+  border-bottom: 1px solid #c3d4ee;
   padding: 14px 20px;
   display: flex;
   align-items: center;
   gap: 10px;
   font-family: 'Orbitron', sans-serif;
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   font-weight: 600;
-  color: #ffb300;
-  letter-spacing: 0.2em;
+  color: #1a3a6b;
+  letter-spacing: 0.15em;
 }
 
 .dot {
-  width: 8px; height: 8px;
-  background: #ffb300;
+  width: 9px; height: 9px;
+  background: #1a3fa8;
   border-radius: 50%;
-  box-shadow: 0 0 8px #ffb300;
   flex-shrink: 0;
 }
-.dot.red { background: #ff3b3b; box-shadow: 0 0 8px #ff3b3b; }
-.dot.green { background: #39ff6e; box-shadow: 0 0 8px #39ff6e; }
+.dot.red { background: #cc2222; }
+.dot.green { background: #0e7a3a; }
 
 .panel-body { padding: 22px; }
 
@@ -136,21 +115,21 @@ body::after {
   display: flex;
   align-items: center;
   gap: 6px;
-  background: rgba(255,179,0,0.05);
-  border: 1px solid rgba(255,179,0,0.25);
-  padding: 8px 14px;
+  background: #dce8f8;
+  border: 1px solid #93b4f5;
+  padding: 6px 12px;
   font-family: 'Share Tech Mono', monospace;
-  font-size: 0.9rem;
-  color: #ffb300;
-  letter-spacing: 0.05em;
+  font-size: 0.88rem;
+  color: #1a3a6b;
+  border-radius: 4px;
 }
 
 .tag .remove {
   cursor: pointer;
-  color: #ff3b3b;
-  font-size: 0.8rem;
+  color: #cc2222;
+  font-size: 0.85rem;
   line-height: 1;
-  opacity: 0.7;
+  opacity: 0.6;
   transition: opacity 0.2s;
   background: none;
   border: none;
@@ -165,47 +144,52 @@ body::after {
 
 input[type="text"] {
   flex: 1;
-  background: #0a0a0c;
-  border: 1px solid rgba(255,179,0,0.25);
-  color: #e8d9b0;
+  background: #ffffff;
+  border: 1px solid #93b4f5;
+  color: #1a2332;
   font-family: 'Share Tech Mono', monospace;
   font-size: 0.95rem;
-  padding: 12px 16px;
+  padding: 10px 14px;
   outline: none;
-  transition: border-color 0.2s;
+  border-radius: 4px;
+  transition: border-color 0.2s, box-shadow 0.2s;
 }
-input[type="text"]:focus { border-color: #ffb300; }
-input[type="text"]::placeholder { color: #8a7a5a; }
+input[type="text"]:focus {
+  border-color: #1a3fa8;
+  box-shadow: 0 0 0 3px rgba(26,86,219,0.12);
+}
+input[type="text"]::placeholder { color: #aab4c4; }
 
 .btn {
   font-family: 'Orbitron', sans-serif;
-  font-size: 0.8rem;
+  font-size: 0.72rem;
   font-weight: 600;
-  letter-spacing: 0.15em;
+  letter-spacing: 0.1em;
   padding: 10px 18px;
   border: 1px solid;
   cursor: pointer;
   transition: all 0.2s;
   white-space: nowrap;
+  border-radius: 4px;
 }
 
 .btn-amber {
-  background: transparent;
-  border-color: #ffb300;
-  color: #ffb300;
+  background: #ffffff;
+  border-color: #1a3fa8;
+  color: #1a3fa8;
 }
 .btn-amber:hover {
-  background: #ffb300;
-  color: #0a0a0c;
+  background: #1a3fa8;
+  color: #ffffff;
 }
 
 .btn-launch {
-  background: #ffb300;
-  border-color: #ffb300;
-  color: #0a0a0c;
+  background: #1a3fa8;
+  border-color: #1a3fa8;
+  color: #ffffff;
   font-family: 'Orbitron', sans-serif;
   font-size: 1rem;
-  font-weight: 600;
+  font-weight: 700;
   letter-spacing: 0.15em;
   padding: 20px 40px;
   display: block;
@@ -213,16 +197,13 @@ input[type="text"]::placeholder { color: #8a7a5a; }
   text-align: center;
   cursor: pointer;
   transition: all 0.2s;
-  border: 1px solid #ffb300;
+  border-radius: 6px;
 }
 .btn-launch:hover:not(:disabled) {
-  background: #ffd54f;
-  box-shadow: 0 0 30px rgba(255,179,0,0.4);
+  background: #0f2d7a;
+  box-shadow: 0 4px 16px rgba(26,86,219,0.3);
 }
-.btn-launch:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
+.btn-launch:disabled { opacity: 0.45; cursor: not-allowed; }
 
 .pref-grid {
   display: grid;
@@ -236,62 +217,60 @@ input[type="text"]::placeholder { color: #8a7a5a; }
   align-items: center;
   gap: 10px;
   padding: 12px 16px;
-  background: #0a0a0c;
-  border: 1px solid rgba(255,179,0,0.25);
+  background: #f8faff;
+  border: 1px solid #d0ddf5;
   cursor: pointer;
-  transition: border-color 0.2s;
+  transition: all 0.15s;
+  border-radius: 4px;
 }
-.pref-item.active { border-color: #ffb300; background: rgba(255,179,0,0.05); }
+.pref-item:hover { border-color: #1a3fa8; background: #e4ecf8; }
+.pref-item.active { border-color: #1a3fa8; background: #dce8f8; }
 
 .pref-check {
-  width: 14px; height: 14px;
-  border: 1px solid rgba(255,179,0,0.25);
+  width: 16px; height: 16px;
+  border: 2px solid #c3d4ee;
   display: flex; align-items: center; justify-content: center;
   flex-shrink: 0;
-  font-size: 0.6rem;
-  color: #ffb300;
+  font-size: 0.65rem;
+  color: #1a3fa8;
+  border-radius: 3px;
 }
-.pref-item.active .pref-check { border-color: #ffb300; }
+.pref-item.active .pref-check { border-color: #1a3fa8; background: #dce8f8; }
 
 .pref-label {
-  font-family: 'Share Tech Mono', monospace;
-  font-size: 0.9rem;
-  color: #8a7a5a;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 1rem;
+  color: #4a5568;
   line-height: 1.3;
+  font-weight: 500;
 }
-.pref-item.active .pref-label { color: #e8d9b0; }
+.pref-item.active .pref-label { color: #1a2332; font-weight: 600; }
 
 #status-bar {
   font-family: 'Share Tech Mono', monospace;
-  font-size: 0.9rem;
-  color: #c47f00;
-  padding: 14px 20px;
-  border-top: 1px solid rgba(255,179,0,0.25);
-  min-height: 36px;
+  font-size: 0.85rem;
+  color: #4a5568;
+  padding: 12px 20px;
+  border-top: 1px solid #dde8f5;
+  min-height: 40px;
   display: flex;
   align-items: center;
   gap: 8px;
+  background: #f8faff;
 }
 
 .status-indicator {
-  width: 8px; height: 8px;
+  width: 9px; height: 9px;
   border-radius: 50%;
-  background: #8a7a5a;
+  background: #c3d4ee;
   flex-shrink: 0;
   transition: background 0.3s;
 }
-.status-indicator.running {
-  background: #39ff6e;
-  box-shadow: 0 0 8px #39ff6e;
-  animation: pulse 1s infinite;
-}
-.status-indicator.done { background: #ffb300; box-shadow: 0 0 8px #ffb300; }
-.status-indicator.error { background: #ff3b3b; box-shadow: 0 0 8px #ff3b3b; }
+.status-indicator.running { background: #0e7a3a; animation: pulse 1s infinite; }
+.status-indicator.done { background: #1a3fa8; }
+.status-indicator.error { background: #cc2222; }
 
-@keyframes pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.3; }
-}
+@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
 
 #results-section { display: none; }
 
@@ -301,23 +280,23 @@ input[type="text"]::placeholder { color: #8a7a5a; }
   align-items: center;
   flex-wrap: wrap;
   gap: 8px;
-  padding: 12px 16px;
-  background: #16161c;
-  border-bottom: 1px solid rgba(255,179,0,0.25);
+  padding: 12px 20px;
+  background: #e4ecf8;
+  border-bottom: 1px solid #c3d4ee;
   font-family: 'Share Tech Mono', monospace;
-  font-size: 0.9rem;
-  color: #8a7a5a;
+  font-size: 0.85rem;
+  color: #4a5568;
 }
-
-.results-meta .count { color: #ffb300; font-size: 1rem; }
+.results-meta .count { color: #1a3a6b; font-size: 1.1rem; font-weight: bold; }
 
 .job-card {
-  border-bottom: 1px solid rgba(255,179,0,0.1);
-  padding: 18px 16px;
-  transition: background 0.2s;
+  border-bottom: 1px solid #edf2f7;
+  padding: 24px 22px;
+  transition: background 0.15s;
+  background: #ffffff;
 }
 .job-card:last-child { border-bottom: none; }
-.job-card:hover { background: rgba(255,179,0,0.05); }
+.job-card:hover { background: #eef3fb; }
 
 .job-card-header {
   display: flex;
@@ -330,88 +309,91 @@ input[type="text"]::placeholder { color: #8a7a5a; }
 
 .job-title {
   font-family: 'Orbitron', sans-serif;
-  font-size: 1.1rem;
-  font-weight: 600;
-  color: #ffb300;
-  letter-spacing: 0.05em;
-  line-height: 1.3;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #1a2332;
+  letter-spacing: 0.02em;
+  line-height: 1.4;
 }
 
 .job-company {
   font-family: 'Share Tech Mono', monospace;
-  font-size: 0.9rem;
-  color: #00cfff;
-  margin-top: 2px;
+  font-size: 0.88rem;
+  color: #1a3fa8;
+  margin-top: 3px;
 }
 
 .score-badge {
   font-family: 'Orbitron', sans-serif;
-  font-size: 0.8rem;
+  font-size: 0.6rem;
   font-weight: 900;
-  padding: 6px 14px;
-  border: 1px solid;
+  padding: 5px 12px;
+  border: 2px solid;
   letter-spacing: 0.15em;
   white-space: nowrap;
   flex-shrink: 0;
+  border-radius: 4px;
 }
-.score-hot { border-color: #39ff6e; color: #39ff6e; background: rgba(57,255,110,0.08); }
-.score-warm { border-color: #ffb300; color: #ffb300; background: rgba(255,179,0,0.05); }
-.score-cold { border-color: #8a7a5a; color: #8a7a5a; background: transparent; }
+.score-hot { border-color: #0e7a3a; color: #0e7a3a; background: #e6f4ec; }
+.score-warm { border-color: #c47000; color: #8a4f00; background: #fff4e0; }
+.score-cold { border-color: #888888; color: #555555; background: #f5f5f5; }
 
 .job-meta {
   display: flex;
   gap: 16px;
   flex-wrap: wrap;
-  margin-bottom: 8px;
+  margin-bottom: 10px;
 }
-
 .job-meta-item {
   font-family: 'Share Tech Mono', monospace;
-  font-size: 0.85rem;
-  color: #8a7a5a;
+  font-size: 0.8rem;
+  color: #718096;
   display: flex;
   align-items: center;
   gap: 4px;
 }
-.job-meta-item .icon { color: #c47f00; }
+.job-meta-item .icon { color: #1a3fa8; }
 
 .job-tags {
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
 }
 .job-skill-tag {
   font-family: 'Share Tech Mono', monospace;
-  font-size: 0.78rem;
-  padding: 4px 10px;
-  background: rgba(0,207,255,0.06);
-  border: 1px solid rgba(0,207,255,0.2);
-  color: #00cfff;
-  letter-spacing: 0.06em;
+  font-size: 0.72rem;
+  padding: 3px 9px;
+  background: #dce8f8;
+  border: 1px solid #93b4f5;
+  color: #1a3a6b;
+  border-radius: 3px;
 }
 .job-skill-tag.vet {
-  background: rgba(57,255,110,0.06);
-  border-color: rgba(57,255,110,0.25);
-  color: #39ff6e;
+  background: #e6f4ec;
+  border-color: #6cc492;
+  color: #0e5a2a;
 }
 
 .job-summary {
   font-size: 1rem;
-  font-weight: 300;
-  color: #e8d9b0;
-  line-height: 1.6;
+  font-weight: 400;
+  color: #2d3748;
+  line-height: 1.75;
   margin-bottom: 10px;
+  font-family: 'Rajdhani', sans-serif;
 }
 
 .job-why {
-  font-family: 'Share Tech Mono', monospace;
-  font-size: 0.88rem;
-  color: #c47f00;
-  border-left: 2px solid #c47f00;
-  padding-left: 10px;
-  line-height: 1.5;
-  margin-bottom: 10px;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 0.95rem;
+  color: #1a3a6b;
+  border-left: 3px solid #1a3fa8;
+  padding: 6px 12px;
+  line-height: 1.6;
+  margin-bottom: 12px;
+  background: #e8f0fa;
+  font-style: italic;
 }
 
 .job-actions {
@@ -422,95 +404,86 @@ input[type="text"]::placeholder { color: #8a7a5a; }
 
 .job-link {
   font-family: 'Orbitron', sans-serif;
-  font-size: 0.78rem;
+  font-size: 0.58rem;
   font-weight: 600;
-  letter-spacing: 0.12em;
-  padding: 8px 16px;
-  border: 1px solid rgba(255,179,0,0.25);
-  color: #8a7a5a;
+  letter-spacing: 0.08em;
+  padding: 7px 14px;
+  border: 1px solid #93b4f5;
+  color: #1a3fa8;
   text-decoration: none;
   transition: all 0.2s;
+  border-radius: 4px;
+  background: #e8f0fa;
 }
-.job-link:hover {
-  border-color: #ffb300;
-  color: #ffb300;
-  background: rgba(255,179,0,0.05);
-}
-.job-link.primary {
-  border-color: #ffb300;
-  color: #ffb300;
-  background: rgba(255,179,0,0.05);
-}
-.job-link.primary:hover {
-  background: #ffb300;
-  color: #0a0a0c;
-}
+.job-link:hover { background: #1a3fa8; color: #ffffff; border-color: #1a3fa8; }
+.job-link.primary { border-color: #1a3fa8; color: #ffffff; background: #1a3fa8; }
+.job-link.primary:hover { background: #0f2d7a; border-color: #0f2d7a; }
 
 .intel-summary {
   font-size: 1.05rem;
-  font-weight: 300;
-  color: #e8d9b0;
-  line-height: 1.7;
+  font-weight: 400;
+  color: #1a2332;
+  line-height: 1.75;
   padding: 20px;
-  border-left: 3px solid #ffb300;
-  background: rgba(255,179,0,0.05);
-  margin: 0 16px 16px;
+  border-left: 4px solid #1a3fa8;
+  background: #e4ecf8;
   font-family: 'Rajdhani', sans-serif;
 }
 
 #raw-log {
   display: none;
-  background: #0a0a0c;
-  border: 1px solid rgba(255,179,0,0.25);
+  background: #f8f9fa;
+  border: 1px solid #dee2e6;
   padding: 14px;
   font-family: 'Share Tech Mono', monospace;
-  font-size: 0.85rem;
-  color: #8a7a5a;
+  font-size: 0.82rem;
+  color: #444444;
   line-height: 1.7;
   max-height: 400px;
   overflow-y: auto;
-  margin: 0 16px 16px;
+  margin: 0 0 16px;
   white-space: pre-wrap;
+  border-radius: 4px;
 }
 
 .toggle-raw {
   font-family: 'Share Tech Mono', monospace;
-  font-size: 0.85rem;
-  color: #8a7a5a;
+  font-size: 0.82rem;
+  color: #aaaaaa;
   cursor: pointer;
   background: none;
   border: none;
   text-decoration: underline;
-  padding: 0 16px 12px;
+  padding: 0 0 12px;
   display: block;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.05em;
 }
-.toggle-raw:hover { color: #ffb300; }
+.toggle-raw:hover { color: #1a3fa8; }
 
 .section-divider {
   display: flex;
   align-items: center;
   gap: 12px;
-  margin: 20px 0;
+  margin: 24px 0;
   font-family: 'Share Tech Mono', monospace;
-  font-size: 0.85rem;
-  color: #8a7a5a;
+  font-size: 0.8rem;
+  color: #aab4c4;
   letter-spacing: 0.15em;
 }
 .section-divider::before, .section-divider::after {
   content: '';
   flex: 1;
   height: 1px;
-  background: rgba(255,179,0,0.25);
+  background: #dde8f5;
 }
 
 .disclaimer {
-  font-family: 'Share Tech Mono', monospace;
-  font-size: 0.85rem;
-  color: #8a7a5a;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 0.9rem;
+  color: #a0aec0;
   text-align: center;
   padding: 16px;
-  border-top: 1px solid rgba(255,179,0,0.25);
+  border-top: 1px solid #edf2f7;
   line-height: 1.6;
 }
 
@@ -523,7 +496,7 @@ input[type="text"]::placeholder { color: #8a7a5a; }
 
 .radar {
   width: 80px; height: 80px;
-  border: 2px solid rgba(255,179,0,0.25);
+  border: 2px solid #c3d4ee;
   border-radius: 50%;
   margin: 0 auto 16px;
   position: relative;
@@ -535,22 +508,22 @@ input[type="text"]::placeholder { color: #8a7a5a; }
   top: 50%; left: 50%;
   width: 50%;
   height: 2px;
-  background: linear-gradient(to right, transparent, #ffb300);
+  background: linear-gradient(to right, transparent, #1a3fa8);
   transform-origin: left center;
 }
 @keyframes radarSpin { to { transform: rotate(360deg); } }
 
 .loading-text {
-  font-family: 'Share Tech Mono', monospace;
+  font-family: 'Orbitron', sans-serif;
   font-size: 1rem;
-  color: #c47f00;
+  color: #1a3a6b;
   letter-spacing: 0.15em;
 }
 
 #loading-msg {
   display: block;
   margin-top: 8px;
-  color: #8a7a5a;
+  color: #718096;
   font-family: 'Share Tech Mono', monospace;
   font-size: 0.9rem;
   animation: blink 1.2s step-end infinite;
@@ -562,36 +535,36 @@ input[type="text"]::placeholder { color: #8a7a5a; }
   align-items: center;
   gap: 10px;
   padding: 14px 20px;
-  background: #16161c;
-  border-top: 1px solid rgba(255,179,0,0.25);
+  background: #e4ecf8;
+  border-top: 1px solid #c3d4ee;
   flex-wrap: wrap;
 }
 .export-label {
   font-family: 'Orbitron', sans-serif;
-  font-size: 0.75rem;
+  font-size: 0.72rem;
   font-weight: 600;
-  color: #c47f00;
-  letter-spacing: 0.15em;
+  color: #1a3a6b;
+  letter-spacing: 0.12em;
   margin-right: 4px;
 }
 .btn-export {
   font-family: 'Orbitron', sans-serif;
-  font-size: 0.7rem;
+  font-size: 0.65rem;
   font-weight: 600;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.08em;
   padding: 8px 16px;
-  border: 1px solid rgba(255,179,0,0.4);
-  color: #ffb300;
-  background: transparent;
+  border: 1px solid #93b4f5;
+  color: #1a3fa8;
+  background: #ffffff;
   cursor: pointer;
   transition: all 0.2s;
+  border-radius: 4px;
 }
-.btn-export:hover { background: #ffb300; color: #0a0a0c; }
-.btn-export.docx { border-color: #00cfff; color: #00cfff; }
-.btn-export.docx:hover { background: #00cfff; color: #0a0a0c; }
-.btn-export.pdf { border-color: #39ff6e; color: #39ff6e; }
-.btn-export.pdf:hover { background: #39ff6e; color: #0a0a0c; }
-
+.btn-export:hover { background: #1a3fa8; color: #ffffff; border-color: #1a3fa8; }
+.btn-export.docx { border-color: #0e7a3a; color: #0e7a3a; }
+.btn-export.docx:hover { background: #0e7a3a; color: #ffffff; border-color: #0e7a3a; }
+.btn-export.pdf { border-color: #cc2222; color: #cc2222; }
+.btn-export.pdf:hover { background: #cc2222; color: #ffffff; border-color: #cc2222; }
 </style>
 </head>
 <body>
@@ -599,7 +572,7 @@ input[type="text"]::placeholder { color: #8a7a5a; }
 
 <div class="header">
   <div class="header-left">
-    <h1>&#9672; CIBOLA JOB SCOUT</h1>
+    <h1>&#9672; JOB SCOUT</h1>
     <div class="subtitle">// AGENTIC INTELLIGENCE DAILY MISSION BRIEFING SYSTEM</div>
   </div>
   <div class="header-right">
@@ -613,15 +586,15 @@ input[type="text"]::placeholder { color: #8a7a5a; }
 <div class="panel" id="backend-panel">
   <div class="panel-header"><span class="dot green"></span> BACKEND CONFIG // NGROK PROXY URL</div>
   <div class="panel-body">
-    <div style="font-family:'Share Tech Mono',monospace;font-size:0.9rem;color:#8a7a5a;margin-bottom:14px;">
-      One-time setup: paste your Render.com service URL below and click SAVE. It never changes, so you only do this once.
+    <div style="font-family:'Share Tech Mono',monospace;font-size:0.9rem;color:#4a5568;margin-bottom:14px;">
+      One-time setup: paste your Hugging Face Space URL below and click SAVE. It never changes, so you only do this once.
     </div>
     <div class="input-row">
-      <input type="text" id="proxy-input" placeholder="https://your-service-name.onrender.com" style="flex:1;">
+      <input type="text" id="proxy-input" placeholder="https://suntzugamer-jobscoutproxy.hf.space" style="flex:1;">
       <button class="btn btn-amber" onclick="saveProxyUrl()">SAVE URL</button>
       <button class="btn btn-amber" onclick="testProxy()" style="border-color:#00cfff;color:#00cfff;">TEST</button>
     </div>
-    <div id="proxy-status" style="font-family:'Share Tech Mono',monospace;font-size:0.88rem;color:#8a7a5a;margin-top:10px;min-height:22px;"></div>
+    <div id="proxy-status" style="font-family:'Share Tech Mono',monospace;font-size:0.88rem;color:#4a5568;margin-top:10px;min-height:22px;"></div>
   </div>
 </div>
 
@@ -710,7 +683,64 @@ input[type="text"]::placeholder { color: #8a7a5a; }
   <button class="toggle-raw" onclick="toggleRaw()">[ TOGGLE RAW INTEL LOG ]</button>
   <pre id="raw-log"></pre>
   <div class="disclaimer">
-    WARNING: CIBOLA JOB SCOUT uses AI-powered web search. Leads are algorithmically identified. Verify all postings before applying. Always apply through official company channels.
+    WARNING: JOB SCOUT uses AI-powered web search. Leads are algorithmically identified. Verify all postings before applying. Always apply through official company channels.
+  </div>
+</div>
+
+<div id="about" style="margin-top:48px;padding-top:32px;border-top:3px solid #1a3fa8;">
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:32px;">
+
+    <div class="panel">
+      <div class="panel-header"><span class="dot"></span> ABOUT JOB SCOUT</div>
+      <div class="panel-body" style="font-family:'Rajdhani',sans-serif;font-size:1rem;color:#2d3748;line-height:1.8;">
+        <p style="margin-bottom:12px;">
+          <strong>Job Scout</strong> is an agentic AI-powered job search tool built by David Fliesen of Cibola Studios.
+          Each day it deploys an intelligent search agent that scans company career pages, LinkedIn, Indeed, and major
+          job boards for opportunities matching your unique hybrid skill profile.
+        </p>
+        <p style="margin-bottom:12px;">
+          Unlike generic job boards, Job Scout understands the intersection of <strong>Generative AI</strong> and
+          <strong>Multimedia production</strong> — identifying roles where your full background is an asset, not just
+          a keyword match. Leads are scored HOT, WARM, or COLD based on fit, and each card explains exactly why
+          the role matches your profile.
+        </p>
+        <p style="color:#4a5568;font-size:0.9rem;">
+          Built with FastAPI &middot; Hugging Face Spaces &middot; Anthropic Claude &middot; GitHub Pages
+        </p>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-header"><span class="dot green"></span> ABOUT DAVID FLIESEN</div>
+      <div class="panel-body" style="font-family:'Rajdhani',sans-serif;font-size:1rem;color:#2d3748;line-height:1.8;">
+        <p style="margin-bottom:12px;">
+          David Fliesen is a <strong>Hybrid AI &amp; Multimedia Developer</strong> and sole proprietor of
+          <strong>Cibola Studios</strong> based in Summerville, SC. He brings 20+ years of multimedia production
+          experience including U.S. Navy Combat Camera photojournalism, combined with 15+ years of AI development
+          work dating back to early metaverse smart agents in 2008.
+        </p>
+        <p style="margin-bottom:16px;">
+          Recent work includes LLM-powered applications using LangChain, LangGraph, RAG pipelines, FLUX image
+          generation, and agentic frameworks. Graduate of Purdue University's Applied Generative AI Specialization
+          and holds a BFA in Media Arts &amp; Animation.
+        </p>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;">
+          <a href="https://davidfliesen.github.io" target="_blank" rel="noopener noreferrer"
+            style="font-family:'Orbitron',sans-serif;font-size:0.7rem;font-weight:600;letter-spacing:0.1em;padding:8px 16px;background:#1a3fa8;color:#fff;text-decoration:none;">
+            &#9672; PORTFOLIO
+          </a>
+          <a href="https://linkedin.com/in/fliesen/" target="_blank" rel="noopener noreferrer"
+            style="font-family:'Orbitron',sans-serif;font-size:0.7rem;font-weight:600;letter-spacing:0.1em;padding:8px 16px;background:transparent;color:#1a3fa8;text-decoration:none;border:1px solid #1a3fa8;">
+            LINKEDIN
+          </a>
+          <a href="https://sisters-of-summerville.github.io" target="_blank" rel="noopener noreferrer"
+            style="font-family:'Orbitron',sans-serif;font-size:0.7rem;font-weight:600;letter-spacing:0.1em;padding:8px 16px;background:transparent;color:#0e7a3a;text-decoration:none;border:1px solid #0e7a3a;">
+            SISTERS OF SUMMERVILLE
+          </a>
+        </div>
+      </div>
+    </div>
+
   </div>
 </div>
 
@@ -782,7 +812,7 @@ window.onload = function() {
   var proxyInput = document.getElementById('proxy-input');
   if (proxyInput && savedUrl) {
     proxyInput.value = savedUrl;
-    document.getElementById('proxy-status').style.color = '#c47f00';
+    document.getElementById('proxy-status').style.color = '#8a5c00';
     document.getElementById('proxy-status').textContent = 'BACKEND URL LOADED // ' + savedUrl;
   }
 };
@@ -792,23 +822,23 @@ function saveProxyUrl() {
   var val = document.getElementById('proxy-input').value.trim().replace(/\/$/, '');
   if (!val) return;
   localStorage.setItem('cibola_proxy_url', val);
-  document.getElementById('proxy-status').style.color = '#39ff6e';
+  document.getElementById('proxy-status').style.color = '#0e7a3a';
   document.getElementById('proxy-status').textContent = 'URL SAVED // ' + val;
 }
 
 function testProxy() {
   var url = (localStorage.getItem('cibola_proxy_url') || '').trim().replace(/\/$/, '');
-  if (!url) { document.getElementById('proxy-status').style.color='#ff3b3b'; document.getElementById('proxy-status').textContent='No URL saved yet.'; return; }
-  document.getElementById('proxy-status').style.color='#c47f00';
+  if (!url) { document.getElementById('proxy-status').style.color='#cc2222'; document.getElementById('proxy-status').textContent='No URL saved yet.'; return; }
+  document.getElementById('proxy-status').style.color='#8a5c00';
   document.getElementById('proxy-status').textContent='Testing connection...';
   fetch(url + '/health')
     .then(function(r){ return r.json(); })
     .then(function(d){
-      document.getElementById('proxy-status').style.color='#39ff6e';
+      document.getElementById('proxy-status').style.color='#0e7a3a';
       document.getElementById('proxy-status').textContent='CONNECTED // Backend online. Ready to scout.';
     })
     .catch(function(){
-      document.getElementById('proxy-status').style.color='#ff3b3b';
+      document.getElementById('proxy-status').style.color='#cc2222';
       document.getElementById('proxy-status').textContent='CONNECTION FAILED // Check ngrok URL or restart Colab.';
     });
 }
@@ -987,7 +1017,7 @@ function renderResults(data, elapsed) {
   var container = document.getElementById('job-cards-container');
   container.innerHTML = '';
   if (leads.length === 0) {
-    container.innerHTML = '<div style="padding:24px;font-family:\'Share Tech Mono\',monospace;color:#8a7a5a;font-size:0.7rem;text-align:center;">NO LEADS IDENTIFIED // Broaden search parameters and retry.</div>';
+    container.innerHTML = '<div style="padding:24px;font-family:\'Share Tech Mono\',monospace;color:#666666;font-size:0.7rem;text-align:center;">NO LEADS IDENTIFIED // Broaden search parameters and retry.</div>';
     return;
   }
   for (var i = 0; i < leads.length; i++) {
@@ -1045,7 +1075,7 @@ function exportTXT() {
     return;
   }
   var lines = [];
-  lines.push('CIBOLA JOB SCOUT // MISSION BRIEFING');
+  lines.push('JOB SCOUT // MISSION BRIEFING');
   lines.push('Date: ' + getDateStamp());
   lines.push('Leads: ' + lastResults.leads.length);
   lines.push('');
@@ -1070,11 +1100,11 @@ function exportTXT() {
     lines.push('   Indeed:   https://www.indeed.com/jobs?q=' + encodeURIComponent((job.title||'') + ' ' + (job.company||'')));
   });
   lines.push('');
-  lines.push('-- Generated by Cibola Job Scout // davidfliesen.github.io/jobscout/');
+  lines.push('-- Generated by Job Scout // davidfliesen.github.io/jobscout/');
   var blob = new Blob([lines.join('\n')], { type: 'text/plain' });
   var a = document.createElement('a');
   a.href = URL.createObjectURL(blob);
-  a.download = 'cibola-scout-' + getDateStamp() + '.txt';
+  a.download = 'job-scout-' + getDateStamp() + '.txt';
   a.click();
 }
 
@@ -1085,7 +1115,7 @@ function exportPDF() {
   }
   var win = window.open('', '_blank');
   var html = '<!DOCTYPE html><html><head><meta charset="UTF-8">';
-  html += '<title>Cibola Job Scout // ' + getDateStamp() + '</title>';
+  html += '<title>Job Scout // ' + getDateStamp() + '</title>';
   html += '<style>';
   html += 'body { font-family: Arial, sans-serif; font-size: 12px; color: #111; max-width: 800px; margin: 0 auto; padding: 20px; }';
   html += 'h1 { font-size: 20px; border-bottom: 2px solid #ffb300; padding-bottom: 8px; color: #b37800; }';
@@ -1105,9 +1135,9 @@ function exportPDF() {
   html += '.why { font-style: italic; color: #555; font-size: 11px; border-left: 3px solid #ffb300; padding-left: 8px; margin: 6px 0; }';
   html += '.links { margin-top: 8px; font-size: 11px; }';
   html += '.links a { color: #1565c0; margin-right: 12px; }';
-  html += '@media print { body { padding: 0; } }';
+  html += '@media print { body { padding: 0; } a { color: #1565c0 !important; text-decoration: underline !important; } }';
   html += '</style></head><body>';
-  html += '<h1>&#9670; CIBOLA JOB SCOUT // MISSION BRIEFING</h1>';
+  html += '<h1>&#9670; JOB SCOUT // MISSION BRIEFING</h1>';
   html += '<div class="meta">Date: ' + getDateStamp() + ' &nbsp;|&nbsp; Leads: ' + lastResults.leads.length + ' &nbsp;|&nbsp; Operator: D. Fliesen // Cibola Studios</div>';
   html += '<div class="summary-box">' + (lastResults.summary || '') + '</div>';
   html += '<h2>OPPORTUNITY LEADS</h2>';
@@ -1131,11 +1161,12 @@ function exportPDF() {
     html += '<a href="' + indUrl + '">Indeed Search</a>';
     html += '</div></div>';
   });
-  html += '<p style="color:#999;font-size:10px;margin-top:20px;">Generated by Cibola Job Scout // davidfliesen.github.io/jobscout/</p>';
+  html += '<p style="color:#999;font-size:10px;margin-top:20px;">Generated by Job Scout // davidfliesen.github.io/jobscout/</p>';
   html += '</body></html>';
+  // Add print button at top of page
+  html = html.replace('<h1>', '<div style="margin-bottom:20px;"><button onclick="window.print()" style="background:#b37800;color:white;border:none;padding:10px 24px;font-size:14px;font-weight:bold;cursor:pointer;margin-right:10px;">PRINT / SAVE AS PDF</button><span style="color:#999;font-size:12px;">Use your browser's print dialog and choose 'Save as PDF'</span></div><h1>');
   win.document.write(html);
   win.document.close();
-  setTimeout(function(){ win.print(); }, 500);
 }
 
 function exportDOCX() {
@@ -1152,7 +1183,7 @@ function exportDOCX() {
 
   // Title
   children.push(new docx.Paragraph({
-    text: 'CIBOLA JOB SCOUT // MISSION BRIEFING',
+    text: 'JOB SCOUT // MISSION BRIEFING',
     heading: docx.HeadingLevel.HEADING_1,
     thematicBreak: true
   }));
@@ -1232,7 +1263,7 @@ function exportDOCX() {
 
   // Footer note
   children.push(new docx.Paragraph({
-    children: [new docx.TextRun({ text: 'Generated by Cibola Job Scout // davidfliesen.github.io/jobscout/', color: '999999', size: 18, italics: true })]
+    children: [new docx.TextRun({ text: 'Generated by Job Scout // davidfliesen.github.io/jobscout/', color: '999999', size: 18, italics: true })]
   }));
 
   var doc = new docx.Document({
@@ -1248,7 +1279,7 @@ function exportDOCX() {
   docx.Packer.toBlob(doc).then(function(blob) {
     var a = document.createElement('a');
     a.href = URL.createObjectURL(blob);
-    a.download = 'cibola-scout-' + getDateStamp() + '.docx';
+    a.download = 'job-scout-' + getDateStamp() + '.docx';
     a.click();
   });
 }
