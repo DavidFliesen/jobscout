@@ -644,8 +644,12 @@ input[type="text"]::placeholder { color: #aab4c4; }
 <div class="panel">
   <div class="panel-header"><span class="dot"></span> JOB SEARCH SOURCES</div>
   <div class="panel-body">
-    <p style="font-family:'Rajdhani',sans-serif;font-size:1rem;color:#4a5568;margin-bottom:16px;line-height:1.7;">The AI agent searches these sources when scouting for opportunities. Toggle any on or off to focus your search.</p>
-    <div class="pref-grid" id="sources-grid"></div>
+    <p style="font-family:'Rajdhani',sans-serif;font-size:1rem;color:#4a5568;margin-bottom:16px;line-height:1.7;">The AI agent searches these sources when scouting for opportunities. Toggle to enable/disable, or add your own.</p>
+    <div class="pref-grid" id="sources-grid" style="margin-bottom:14px;"></div>
+    <div class="input-row">
+      <input type="text" id="source-input" placeholder="Add a job board or site (e.g. SimplyHired)..." maxlength="60" onkeydown="if(event.key==='Enter')addSource()">
+      <button class="btn btn-amber" onclick="addSource()">+ ADD</button>
+    </div>
   </div>
 </div>
 </div>
@@ -714,26 +718,26 @@ input[type="text"]::placeholder { color: #aab4c4; }
     <div class="panel-body" style="font-family:'Rajdhani',sans-serif;font-size:1.05rem;color:#2d3748;line-height:1.85;">
 
       <h3 style="font-family:'Orbitron',sans-serif;font-size:0.85rem;color:#1a3a6b;margin:0 0 8px;letter-spacing:0.08em;">STEP 1 &mdash; BACKEND SETUP (ONE TIME ONLY)</h3>
-      <p style="margin-bottom:20px;">Job Scout uses a free backend server on Hugging Face Spaces to connect to the AI. Paste your Hugging Face Space URL into the <strong>Backend Config</strong> panel at the top, click <strong>Save URL</strong>, then click <strong>Test</strong> to confirm it is online. You only ever need to do this once &mdash; the URL saves automatically to your browser.</p>
+      <p style="margin-bottom:20px;">Job Scout connects to an AI through a free backend server hosted on Hugging Face Spaces. Paste your Hugging Face Space URL into the <strong>Backend Config</strong> panel at the top of the page, click <strong>Save URL</strong>, then click <strong>Test</strong> to confirm it is online. You only need to do this once &mdash; the URL is saved automatically in your browser and remembered on every future visit.</p>
 
-      <h3 style="font-family:'Orbitron',sans-serif;font-size:0.85rem;color:#1a3a6b;margin:0 0 8px;letter-spacing:0.08em;">STEP 2 &mdash; CONFIGURE YOUR TARGETS</h3>
-      <p style="margin-bottom:8px;">Customize your search using the panels on the page:</p>
+      <h3 style="font-family:'Orbitron',sans-serif;font-size:0.85rem;color:#1a3a6b;margin:0 0 8px;letter-spacing:0.08em;">STEP 2 &mdash; CONFIGURE YOUR SEARCH</h3>
+      <p style="margin-bottom:8px;">Use the panels to tailor the search to your background and preferences before each mission:</p>
       <ul style="margin:0 0 20px 24px;">
-        <li style="margin-bottom:8px;"><strong>Target Companies</strong> &mdash; Companies you want the agent to specifically check. Defaults include Adobe, OpenAI, Anthropic, Google, Microsoft, NVIDIA, and Meta AI.</li>
-        <li style="margin-bottom:8px;"><strong>Skill Keywords</strong> &mdash; Skills you want matched against job descriptions.</li>
-        <li style="margin-bottom:8px;"><strong>Locations / Work Mode</strong> &mdash; Your acceptable work locations. Remote is always recommended.</li>
-        <li style="margin-bottom:8px;"><strong>Job Search Sources</strong> &mdash; Toggle which job boards and sites the agent searches.</li>
-        <li style="margin-bottom:8px;"><strong>Search Preferences</strong> &mdash; Filters like Disabled Veteran Friendly, Remote Only, No Relocation Required, and more.</li>
+        <li style="margin-bottom:8px;"><strong>Target Companies</strong> &mdash; Add specific employers you want the agent to check. You can add or remove companies at any time.</li>
+        <li style="margin-bottom:8px;"><strong>Skill Keywords</strong> &mdash; Add the skills, tools, and technologies you want matched against job descriptions.</li>
+        <li style="margin-bottom:8px;"><strong>Locations / Work Mode</strong> &mdash; Set your preferred work locations. Adding &ldquo;Remote&rdquo; ensures remote opportunities are always included.</li>
+        <li style="margin-bottom:8px;"><strong>Job Search Sources</strong> &mdash; Toggle which job boards and career sites the agent searches. You can also add your own sources using the + ADD button.</li>
+        <li style="margin-bottom:8px;"><strong>Search Preferences</strong> &mdash; Apply filters such as Remote Only, No Relocation Required, Veteran Friendly, and more.</li>
       </ul>
 
       <h3 style="font-family:'Orbitron',sans-serif;font-size:0.85rem;color:#1a3a6b;margin:0 0 8px;letter-spacing:0.08em;">STEP 3 &mdash; LAUNCH YOUR MISSION</h3>
-      <p style="margin-bottom:20px;">Click <strong>Launch Daily Scout Mission</strong>. The agent searches the web in real time, typically taking 30&ndash;60 seconds. Each result is scored <strong>HOT</strong>, <strong>WARM</strong>, or <strong>COLD</strong> based on how well it matches your profile, with a plain-English explanation of why each role is a good fit.</p>
+      <p style="margin-bottom:20px;">Click <strong>Launch Daily Scout Mission</strong>. The agent searches the web in real time, which typically takes 30&ndash;60 seconds. Results are scored <strong>HOT</strong>, <strong>WARM</strong>, or <strong>COLD</strong> based on how closely each role matches your configured profile. Each card includes a plain-English explanation of why the role is a good fit, along with direct links to apply.</p>
 
       <h3 style="font-family:'Orbitron',sans-serif;font-size:0.85rem;color:#1a3a6b;margin:0 0 8px;letter-spacing:0.08em;">STEP 4 &mdash; EXPORT YOUR BRIEFING</h3>
-      <p style="margin-bottom:20px;">After results load, use the <strong>Export Briefing</strong> bar to save your leads as a <strong>TXT</strong> file, a <strong>Word .DOCX</strong> document with live hyperlinks, or open a print-ready <strong>PDF</strong> view. All exports include Apply, LinkedIn, and Indeed links for every opportunity.</p>
+      <p style="margin-bottom:20px;">Once results are loaded, use the <strong>Export Briefing</strong> bar to save your leads as a plain <strong>TXT</strong> file, a formatted <strong>Word .DOCX</strong> document with live hyperlinks, or a print-ready <strong>PDF</strong>. Every export includes Apply, LinkedIn, and Indeed links for each opportunity.</p>
 
       <h3 style="font-family:'Orbitron',sans-serif;font-size:0.85rem;color:#1a3a6b;margin:0 0 8px;letter-spacing:0.08em;">SETTINGS &mdash; IMPORT / EXPORT CONFIG</h3>
-      <p>All your settings save automatically in your browser. To copy your configuration to another device, use the <strong>Export Config</strong> button to copy a small code snippet, then paste it using <strong>Import Config</strong> on the other device.</p>
+      <p>All settings are saved automatically in your browser and persist between visits. To transfer your configuration to another device, click <strong>Export Config</strong> to copy a small JSON snippet to your clipboard, then use <strong>Import Config</strong> on the other device to restore everything instantly.</p>
 
     </div>
   </div>
@@ -745,13 +749,14 @@ input[type="text"]::placeholder { color: #aab4c4; }
     <div class="panel-body" style="font-family:'Rajdhani',sans-serif;font-size:1.05rem;color:#2d3748;line-height:1.85;">
 
       <h3 style="font-family:'Orbitron',sans-serif;font-size:0.85rem;color:#1a3a6b;margin:0 0 8px;letter-spacing:0.08em;">ABOUT JOB SCOUT</h3>
-      <p style="margin-bottom:16px;"><strong>Job Scout</strong> is an agentic AI-powered job search tool built by David Fliesen of Cibola Studios. Each day it deploys an intelligent search agent that scans company career pages, LinkedIn, Indeed, and major job boards for opportunities matching your unique hybrid skill profile.</p>
-      <p style="margin-bottom:24px;">Unlike generic job boards, Job Scout understands the intersection of <strong>Generative AI</strong> and <strong>Multimedia production</strong> &mdash; identifying roles where your full background is an asset, not just a keyword match. Leads are scored HOT, WARM, or COLD based on fit, with a plain-English explanation for each.</p>
+      <p style="margin-bottom:16px;"><strong>Job Scout</strong> is an agentic AI-powered job search tool that deploys an intelligent search agent each day to scan company career pages and major job boards for opportunities that match your configured profile.</p>
+      <p style="margin-bottom:16px;">Unlike browsing job boards manually, Job Scout works from your specific combination of skills, target companies, preferred locations, and search preferences &mdash; returning scored, ranked results with a plain-English explanation of why each role fits. Leads are rated <strong>HOT</strong>, <strong>WARM</strong>, or <strong>COLD</strong> so you can focus your time on the strongest opportunities first.</p>
+      <p style="margin-bottom:32px;">Results can be exported as a plain text file, a formatted Word document with live hyperlinks, or a print-ready PDF &mdash; making it easy to track, share, or archive your daily leads.</p>
       <p style="color:#4a5568;font-size:0.95rem;margin-bottom:32px;">Built with FastAPI &middot; Hugging Face Spaces &middot; Anthropic Claude &middot; GitHub Pages</p>
 
-      <h3 style="font-family:'Orbitron',sans-serif;font-size:0.85rem;color:#1a3a6b;margin:0 0 8px;letter-spacing:0.08em;">ABOUT DAVID FLIESEN</h3>
-      <p style="margin-bottom:12px;">David Fliesen is a <strong>Hybrid AI &amp; Multimedia Developer</strong> and sole proprietor of <strong>Cibola Studios</strong> based in Summerville, SC. He brings 20+ years of multimedia production experience including U.S. Navy Combat Camera photojournalism, combined with 15+ years of AI development work dating back to early metaverse smart agents in 2008.</p>
-      <p style="margin-bottom:20px;">Recent work includes LLM-powered applications using LangChain, LangGraph, RAG pipelines, FLUX image generation, and agentic frameworks. Graduate of Purdue University&rsquo;s Applied Generative AI Specialization and holds a BFA in Media Arts &amp; Animation.</p>
+      <h3 style="font-family:'Orbitron',sans-serif;font-size:0.85rem;color:#1a3a6b;margin:0 0 8px;letter-spacing:0.08em;">ABOUT THE DEVELOPER</h3>
+      <p style="margin-bottom:12px;">David Fliesen is a <strong>Hybrid AI &amp; Multimedia Developer</strong> based in Summerville, SC. He brings 20+ years of multimedia production experience including U.S. Navy Combat Camera photojournalism, combined with 15+ years of AI development work dating back to early metaverse smart agents in 2008.</p>
+      <p style="margin-bottom:20px;">Recent work spans LLM-powered applications, agentic frameworks, RAG pipelines, and generative image tools. Graduate of Purdue University&rsquo;s Applied Generative AI Specialization and holds a BFA in Media Arts &amp; Animation.</p>
       <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:4px;">
         <a href="https://davidfliesen.github.io" target="_blank" rel="noopener noreferrer" style="font-family:'Orbitron',sans-serif;font-size:0.68rem;font-weight:600;letter-spacing:0.1em;padding:9px 18px;background:#1a3fa8;color:#fff;text-decoration:none;border-radius:4px;">&#9672; PORTFOLIO</a>
         <a href="https://linkedin.com/in/fliesen/" target="_blank" rel="noopener noreferrer" style="font-family:'Orbitron',sans-serif;font-size:0.68rem;font-weight:600;letter-spacing:0.1em;padding:9px 18px;background:#fff;color:#1a3fa8;text-decoration:none;border:1px solid #1a3fa8;border-radius:4px;">LINKEDIN</a>
@@ -766,7 +771,7 @@ input[type="text"]::placeholder { color: #aab4c4; }
 var DEFAULTS = {
   companies: ['Adobe', 'OpenAI', 'Anthropic', 'Google', 'Microsoft', 'NVIDIA', 'Meta AI', 'Boeing', 'Newport News Shipbuilding HII', 'Northwestern Mutual', 'Onebrief BattleRoad', 'Tidewater Technical College'],
   skills: ['Generative AI', 'LLM', 'Multimedia', 'Python', 'FastAPI', 'Creative Technology', 'Computer Vision', 'Prompt Engineering'],
-  locations: ['Remote', 'Summerville SC', 'North Charleston SC', 'Goose Creek SC', 'Charleston SC'],
+  locations: ['Remote', 'Summerville SC', 'North Charleston SC', 'Goose Creek SC', 'Ladson SC', 'Moncks Corner SC', 'Ridgeville SC', 'Charleston SC'],
   prefs: {
     'Disabled Veteran Friendly': true,
     'Remote / Hybrid Only': true,
@@ -777,17 +782,17 @@ var DEFAULTS = {
     'Startup / Scaleup': true,
     'Enterprise / Corp': true
   },
-  sources: {
-    'LinkedIn': true,
-    'Indeed': true,
-    'Company Career Pages': true,
-    'ZipRecruiter': true,
-    'Glassdoor': true,
-    'Dice (Tech Jobs)': true,
-    'USAJobs (Federal)': false,
-    'AngelList / Wellfound': true,
-    'FlexJobs': true
-  }
+  sources: [
+    {name:'LinkedIn', active:true},
+    {name:'Indeed', active:true},
+    {name:'Company Career Pages', active:true},
+    {name:'ZipRecruiter', active:true},
+    {name:'Glassdoor', active:true},
+    {name:'Dice (Tech Jobs)', active:true},
+    {name:'USAJobs (Federal)', active:true},
+    {name:'AngelList / Wellfound', active:true},
+    {name:'FlexJobs', active:true}
+  ]
 };
 
 function loadState() {
@@ -800,7 +805,7 @@ function loadState() {
         skills: parsed.skills || DEFAULTS.skills.slice(),
         locations: parsed.locations || DEFAULTS.locations.slice(),
         prefs: parsed.prefs || JSON.parse(JSON.stringify(DEFAULTS.prefs)),
-        sources: parsed.sources || JSON.parse(JSON.stringify(DEFAULTS.sources))
+        sources: (parsed.sources && Array.isArray(parsed.sources)) ? parsed.sources : JSON.parse(JSON.stringify(DEFAULTS.sources))
       };
     }
   } catch(e) {}
@@ -839,23 +844,37 @@ function renderSources() {
   var grid = document.getElementById('sources-grid');
   if (!grid) return;
   grid.innerHTML = '';
-  Object.keys(state.sources).forEach(function(label) {
-    var active = state.sources[label];
+  state.sources.forEach(function(src, idx) {
     var item = document.createElement('div');
-    item.className = 'pref-item' + (active ? ' active' : '');
-    item.onclick = (function(lbl) {
-      return function() { state.sources[lbl] = !state.sources[lbl]; saveState(); renderSources(); };
-    })(label);
+    item.className = 'pref-item' + (src.active ? ' active' : '');
+    item.onclick = (function(i) {
+      return function() { state.sources[i].active = !state.sources[i].active; saveState(); renderSources(); };
+    })(idx);
     var check = document.createElement('div');
     check.className = 'pref-check';
-    check.textContent = active ? '✓' : '';
+    check.textContent = src.active ? '✓' : '';
     var lbl = document.createElement('div');
     lbl.className = 'pref-label';
-    lbl.textContent = label;
+    lbl.textContent = src.name;
+    var removeBtn = document.createElement('button');
+    removeBtn.className = 'remove';
+    removeBtn.textContent = 'x';
+    removeBtn.style.marginLeft = 'auto';
+    removeBtn.onclick = function(e) { e.stopPropagation(); state.sources.splice(idx, 1); saveState(); renderSources(); };
     item.appendChild(check);
     item.appendChild(lbl);
+    item.appendChild(removeBtn);
     grid.appendChild(item);
   });
+}
+
+function addSource() {
+  var input = document.getElementById('source-input');
+  var val = input.value.trim();
+  if (!val) return;
+  var exists = state.sources.some(function(s){ return s.name === val; });
+  if (!exists) { state.sources.push({name: val, active: true}); saveState(); renderSources(); }
+  input.value = '';
 }
 
 /* window.onload moved to end */
@@ -996,7 +1015,7 @@ function stopLoadingMessages() { clearInterval(loadingMsgInterval); }
 
 function buildPrompt() {
   var activePrefs = Object.keys(state.prefs).filter(function(k) { return state.prefs[k]; }).join(', ');
-  return 'You are an expert job search intelligence agent helping a highly specialized candidate find ideal job opportunities.\n\nCANDIDATE PROFILE:\n- Title: Hybrid AI and Multimedia Developer\n- Location: Summerville/Charleston SC. Strongly prefers remote or local SC work.\n- Background: 20+ years multimedia production (Navy Combat Camera photojournalist), 15+ years AI\n- Key Skills: Generative AI (LangChain, LangGraph, RAG, FAISS), Python, FastAPI, Streamlit, Groq LLMs, D-ID avatars, Adobe CC, 3D animation (iClone, Blender, Maya), FLUX image generation, comic/narrative AI, React, GitHub Pages\n- Portfolio: davidfliesen.github.io\n- Notable work: AHA Healthcare AI agent, InsightForge BI dashboard, Aladdin News Genie, Sisters of Summerville daily AI comic strip, ComicsGen app\n- Education: Purdue Applied Generative AI Specialization, BFA Media Arts\n- Special status: Disabled Veteran. Work-from-home strongly preferred. Paid travel acceptable. NOT willing to relocate.\n\nSEARCH TARGETS:\nCompanies: ' + state.companies.join(', ') + '\nSkills/Keywords: ' + state.skills.join(', ') + '\nLocations Acceptable: ' + state.locations.join(', ') + '\nActive Job Sources: ' + Object.keys(state.sources).filter(function(k){return state.sources[k];}).join(', ') + '\nActive Preferences: ' + activePrefs + '\n\nMISSION: Search the web RIGHT NOW for current open job postings (posted in the last 30-60 days) matching this profile. Look at each company careers page, LinkedIn, Indeed, and job boards. Find 5-10 strong matches.\n\nCRITICAL: Respond ONLY with a valid JSON object. No markdown, no backticks, no preamble. Use this exact format:\n{\n  "summary": "2-3 sentence executive summary of todays opportunity landscape",\n  "scan_timestamp": "ISO timestamp",\n  "leads": [\n    {\n      "title": "Job Title",\n      "company": "Company Name",\n      "location": "Location or Remote",\n      "work_mode": "Remote or Hybrid or On-site",\n      "match_score": "HOT or WARM or COLD",\n      "match_reason": "1-2 sentences why this fits the candidates background",\n      "summary": "2-3 sentence description of the role",\n      "skill_tags": ["tag1", "tag2"],\n      "veteran_friendly": true,\n      "apply_url": "direct URL to job posting or careers page",\n      "source": "LinkedIn or Indeed or Company Careers"\n    }\n  ]\n}';
+  return 'You are an expert job search intelligence agent helping a highly specialized candidate find ideal job opportunities.\n\nCANDIDATE PROFILE:\n- Title: Hybrid AI and Multimedia Developer\n- Location: Summerville/Charleston SC. Strongly prefers remote or local SC work.\n- Background: 20+ years multimedia production (Navy Combat Camera photojournalist), 15+ years AI\n- Key Skills: Generative AI (LangChain, LangGraph, RAG, FAISS), Python, FastAPI, Streamlit, Groq LLMs, D-ID avatars, Adobe CC, 3D animation (iClone, Blender, Maya), FLUX image generation, comic/narrative AI, React, GitHub Pages\n- Portfolio: davidfliesen.github.io\n- Notable work: AHA Healthcare AI agent, InsightForge BI dashboard, Aladdin News Genie, Sisters of Summerville daily AI comic strip, ComicsGen app\n- Education: Purdue Applied Generative AI Specialization, BFA Media Arts\n- Special status: Disabled Veteran. Work-from-home strongly preferred. Paid travel acceptable. NOT willing to relocate.\n\nSEARCH TARGETS:\nCompanies: ' + state.companies.join(', ') + '\nSkills/Keywords: ' + state.skills.join(', ') + '\nLocations Acceptable: ' + state.locations.join(', ') + '\nActive Job Sources: ' + state.sources.filter(function(s){return s.active;}).map(function(s){return s.name;}).join(', ') + '\nActive Preferences: ' + activePrefs + '\n\nMISSION: Search the web RIGHT NOW for current open job postings (posted in the last 30-60 days) matching this profile. Look at each company careers page, LinkedIn, Indeed, and job boards. Find 5-10 strong matches.\n\nCRITICAL: Respond ONLY with a valid JSON object. No markdown, no backticks, no preamble. Use this exact format:\n{\n  "summary": "2-3 sentence executive summary of todays opportunity landscape",\n  "scan_timestamp": "ISO timestamp",\n  "leads": [\n    {\n      "title": "Job Title",\n      "company": "Company Name",\n      "location": "Location or Remote",\n      "work_mode": "Remote or Hybrid or On-site",\n      "match_score": "HOT or WARM or COLD",\n      "match_reason": "1-2 sentences why this fits the candidates background",\n      "summary": "2-3 sentence description of the role",\n      "skill_tags": ["tag1", "tag2"],\n      "veteran_friendly": true,\n      "apply_url": "direct URL to job posting or careers page",\n      "source": "LinkedIn or Indeed or Company Careers"\n    }\n  ]\n}';
 }
 
 function launchScout() {
@@ -1181,7 +1200,7 @@ function exportPDF() {
   html += '@media print { body { padding: 0; } a { color: #1565c0 !important; text-decoration: underline !important; } }';
   html += '</style></head><body>';
   html += '<h1>&#9670; JOB SCOUT // MISSION BRIEFING</h1>';
-  html += '<div class="meta">Date: ' + getDateStamp() + ' &nbsp;|&nbsp; Leads: ' + lastResults.leads.length + ' &nbsp;|&nbsp; Operator: D. Fliesen // Cibola Studios</div>';
+  html += '<div class="meta">Date: ' + getDateStamp() + ' &nbsp;|&nbsp; Leads: ' + lastResults.leads.length + ' &nbsp;|&nbsp; Operator: D. Fliesen</div>';
   html += '<div class="summary-box">' + (lastResults.summary || '') + '</div>';
   html += '<h2>OPPORTUNITY LEADS</h2>';
   lastResults.leads.forEach(function(job, i) {
@@ -1233,7 +1252,7 @@ function exportDOCX() {
 
   // Meta
   children.push(new docx.Paragraph({
-    children: [new docx.TextRun({ text: 'Date: ' + getDateStamp() + '   |   Leads: ' + lastResults.leads.length + '   |   Operator: D. Fliesen // Cibola Studios', color: '888888', size: 20 })]
+    children: [new docx.TextRun({ text: 'Date: ' + getDateStamp() + '   |   Leads: ' + lastResults.leads.length + '   |   Operator: D. Fliesen', color: '888888', size: 20 })]
   }));
   children.push(new docx.Paragraph({ text: '' }));
 
