@@ -565,6 +565,110 @@ input[type="text"]::placeholder { color: #aab4c4; }
 .btn-export.docx:hover { background: #0e7a3a; color: #ffffff; border-color: #0e7a3a; }
 .btn-export.pdf { border-color: #cc2222; color: #cc2222; }
 .btn-export.pdf:hover { background: #cc2222; color: #ffffff; border-color: #cc2222; }
+
+/* Numeric score badge */
+.score-num {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 900;
+  min-width: 52px;
+  text-align: center;
+  padding: 6px 10px;
+  border: 2px solid;
+  border-radius: 4px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.score-num.hot  { border-color: #0e7a3a; color: #0e7a3a; background: #e6f4ec; }
+.score-num.warm { border-color: #c47000; color: #8a4f00; background: #fff4e0; }
+.score-num.cold { border-color: #888888; color: #555555; background: #f5f5f5; }
+
+/* Score bar */
+.score-bar-wrap { height: 6px; background: #e8edf5; border-radius: 3px; margin: 4px 0 10px; }
+.score-bar { height: 6px; border-radius: 3px; transition: width 0.4s ease; }
+.score-bar.hot  { background: #0e7a3a; }
+.score-bar.warm { background: #c47000; }
+.score-bar.cold { background: #aaaaaa; }
+
+/* Scoring legend */
+.score-legend {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  padding: 14px 20px;
+  background: #eef3fc;
+  border-bottom: 1px solid #c3d4ee;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.8rem;
+}
+.legend-item { display: flex; align-items: center; gap: 8px; }
+.legend-dot {
+  width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0;
+}
+
+/* Profile panel */
+.profile-status {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.82rem;
+  color: #4a5568;
+  margin-top: 10px;
+  min-height: 20px;
+}
+.profile-loaded {
+  background: #e6f4ec;
+  border: 1px solid #6cc492;
+  border-radius: 4px;
+  padding: 12px 16px;
+  margin-top: 12px;
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 0.95rem;
+  color: #0e5a2a;
+  line-height: 1.6;
+}
+
+
+.debug-panel {
+  background: #f8f9fa;
+  border: 1px solid #dee2e6;
+  border-radius: 4px;
+  margin: 0 0 16px;
+  overflow: hidden;
+  display: none;
+}
+.debug-panel.visible { display: block; }
+.debug-tab-bar {
+  display: flex;
+  background: #e9ecef;
+  border-bottom: 1px solid #dee2e6;
+}
+.debug-tab {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.75rem;
+  padding: 8px 16px;
+  cursor: pointer;
+  border: none;
+  background: none;
+  color: #666;
+  letter-spacing: 0.05em;
+  border-bottom: 2px solid transparent;
+}
+.debug-tab.active { color: #1a3fa8; border-bottom-color: #1a3fa8; background: #f8f9fa; }
+.debug-content {
+  padding: 14px;
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 0.8rem;
+  color: #333;
+  line-height: 1.7;
+  max-height: 360px;
+  overflow-y: auto;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+.debug-content .ok   { color: #0e7a3a; }
+.debug-content .warn { color: #c47000; }
+.debug-content .err  { color: #cc2222; }
+.debug-content .head { color: #1a3a6b; font-weight: bold; }
+
 </style>
 </head>
 <body>
@@ -573,6 +677,7 @@ input[type="text"]::placeholder { color: #aab4c4; }
 <nav style="display:flex;align-items:center;justify-content:space-between;padding:10px 0 12px;margin-bottom:16px;flex-wrap:wrap;gap:8px;">
   <div style="font-family:'Orbitron',sans-serif;font-size:0.8rem;font-weight:700;color:#1a3a6b;letter-spacing:0.15em;">&#9672; JOB SCOUT</div>
   <div style="display:flex;gap:6px;flex-wrap:wrap;align-items:center;">
+    <a href="#profile-setup" style="font-family:'Orbitron',sans-serif;font-size:0.62rem;font-weight:600;letter-spacing:0.08em;color:#1a3fa8;text-decoration:none;padding:6px 13px;border:1px solid #c3d4ee;border-radius:4px;background:#fff;">PROFILE</a>
     <a href="#scout" style="font-family:'Orbitron',sans-serif;font-size:0.62rem;font-weight:600;letter-spacing:0.08em;color:#1a3fa8;text-decoration:none;padding:6px 13px;border:1px solid #c3d4ee;border-radius:4px;background:#fff;">SCOUT</a>
     <a href="#sources-section" style="font-family:'Orbitron',sans-serif;font-size:0.62rem;font-weight:600;letter-spacing:0.08em;color:#1a3fa8;text-decoration:none;padding:6px 13px;border:1px solid #c3d4ee;border-radius:4px;background:#fff;">SOURCES</a>
     <a href="#how-to" style="font-family:'Orbitron',sans-serif;font-size:0.62rem;font-weight:600;letter-spacing:0.08em;color:#1a3fa8;text-decoration:none;padding:6px 13px;border:1px solid #c3d4ee;border-radius:4px;background:#fff;">HOW TO</a>
@@ -589,15 +694,37 @@ input[type="text"]::placeholder { color: #aab4c4; }
 </div>
 
 
+
+<div id="profile-setup" style="scroll-margin-top:20px;">
+<div class="panel">
+  <div class="panel-header" style="justify-content:space-between;">
+    <div style="display:flex;align-items:center;gap:10px;"><span class="dot green"></span> PROFILE SETUP // UPLOAD RESUME OR DOCUMENTS</div>
+    <span id="profile-badge" style="font-family:'Share Tech Mono',monospace;font-size:0.75rem;color:#0e7a3a;display:none;">&#10003; PROFILE LOADED</span>
+  </div>
+  <div class="panel-body">
+    <p style="font-family:'Rajdhani',sans-serif;font-size:1rem;color:#4a5568;margin-bottom:14px;line-height:1.7;">
+      Upload your resume or any relevant career document. Job Scout will read it and automatically populate your skill keywords, target companies, locations, and preferences — and use it to score how well each job matches your actual qualifications.
+    </p>
+    <div class="input-row" style="align-items:center;">
+      <input type="file" id="resume-file" accept=".pdf,.txt,.doc,.docx" style="flex:1;font-family:'Share Tech Mono',monospace;font-size:0.85rem;padding:8px;border:1px solid #7a9ee0;border-radius:4px;background:#fff;color:#1a2332;">
+      <button class="btn btn-amber" onclick="parseResume()">ANALYZE &amp; POPULATE</button>
+      <button class="btn" style="border-color:#888;color:#888;" onclick="clearProfile()">CLEAR</button>
+    </div>
+    <div class="profile-status" id="profile-status"></div>
+    <div id="profile-summary-box" style="display:none;" class="profile-loaded"></div>
+  </div>
+</div>
+</div>
+
 <div id="scout" style="scroll-margin-top:10px;"></div>
 <div class="panel" id="backend-panel">
-  <div class="panel-header"><span class="dot green"></span> BACKEND CONFIG // NGROK PROXY URL</div>
+  <div class="panel-header"><span class="dot green"></span> BACKEND CONFIG // HUGGING FACE SPACE URL</div>
   <div class="panel-body">
     <div style="font-family:'Share Tech Mono',monospace;font-size:0.9rem;color:#4a5568;margin-bottom:14px;">
       One-time setup: paste your Hugging Face Space URL below and click SAVE. It never changes, so you only do this once.
     </div>
     <div class="input-row">
-      <input type="text" id="proxy-input" placeholder="https://suntzugamer-jobscoutproxy.hf.space" style="flex:1;">
+      <input type="text" id="proxy-input" placeholder="https://your-username-your-space-name.hf.space" style="flex:1;">
       <button class="btn btn-amber" onclick="saveProxyUrl()">SAVE URL</button>
       <button class="btn btn-amber" onclick="testProxy()" style="border-color:#1a3fa8;color:#1a3fa8;">TEST</button>
     </div>
@@ -669,6 +796,19 @@ input[type="text"]::placeholder { color: #aab4c4; }
 
 <div class="panel">
   <div class="panel-body" style="padding:16px;">
+    <div style="display:flex;gap:10px;align-items:stretch;margin-bottom:10px;">
+      <button class="btn btn-amber" style="font-size:0.7rem;white-space:nowrap;" onclick="toggleDebug()">&#128269; DEBUG PANEL</button>
+      <button class="btn btn-amber" style="font-size:0.7rem;white-space:nowrap;" onclick="showTab('prompt')">PREVIEW PROMPT</button>
+      <button class="btn btn-amber" style="font-size:0.7rem;white-space:nowrap;" onclick="validateConfig()">VALIDATE CONFIG</button>
+    </div>
+    <div class="debug-panel" id="debug-panel">
+      <div class="debug-tab-bar">
+        <button class="debug-tab active" id="tab-prompt" onclick="showTab('prompt')">PROMPT</button>
+        <button class="debug-tab" id="tab-validate" onclick="showTab('validate')">VALIDATE</button>
+        <button class="debug-tab" id="tab-raw" onclick="showTab('raw')">RAW RESPONSE</button>
+      </div>
+      <div class="debug-content" id="debug-content">Click PREVIEW PROMPT or VALIDATE CONFIG to inspect your setup.</div>
+    </div>
     <button class="btn-launch" id="launch-btn" onclick="launchScout()">
       &#9672; LAUNCH DAILY SCOUT MISSION
     </button>
@@ -697,6 +837,12 @@ input[type="text"]::placeholder { color: #aab4c4; }
       <div>LEADS IDENTIFIED: <span class="count" id="lead-count">0</span></div>
       <div id="scan-time"></div>
     </div>
+    <div class="score-legend" id="score-legend" style="display:none;">
+    <strong style="font-family:'Orbitron',sans-serif;font-size:0.7rem;color:#1a3a6b;letter-spacing:0.1em;">MATCH SCORE:</strong>
+    <div class="legend-item"><div class="legend-dot" style="background:#0e7a3a;"></div><span><strong style="color:#0e7a3a;">75–100 HOT</strong> — Strong match, apply now</span></div>
+    <div class="legend-item"><div class="legend-dot" style="background:#c47000;"></div><span><strong style="color:#c47000;">50–74 WARM</strong> — Good fit, worth a closer look</span></div>
+    <div class="legend-item"><div class="legend-dot" style="background:#aaaaaa;"></div><span><strong style="color:#555;">0–49 COLD</strong> — Partial match, stretch role</span></div>
+  </div>
     <div id="job-cards-container"></div>
   </div>
   <div class="export-bar" id="export-bar">
@@ -718,7 +864,8 @@ input[type="text"]::placeholder { color: #aab4c4; }
     <div class="panel-body" style="font-family:'Rajdhani',sans-serif;font-size:1.05rem;color:#2d3748;line-height:1.85;">
 
       <h3 style="font-family:'Orbitron',sans-serif;font-size:0.85rem;color:#1a3a6b;margin:0 0 8px;letter-spacing:0.08em;">STEP 1 &mdash; BACKEND SETUP (ONE TIME ONLY)</h3>
-      <p style="margin-bottom:20px;">Job Scout connects to an AI through a free backend server hosted on Hugging Face Spaces. Paste your Hugging Face Space URL into the <strong>Backend Config</strong> panel at the top of the page, click <strong>Save URL</strong>, then click <strong>Test</strong> to confirm it is online. You only need to do this once &mdash; the URL is saved automatically in your browser and remembered on every future visit.</p>
+      <p style="margin-bottom:12px;">Job Scout connects to an AI through a free backend server hosted on Hugging Face Spaces. Paste your Hugging Face Space URL into the <strong>Backend Config</strong> panel at the top of the page, click <strong>Save URL</strong>, then click <strong>Test</strong> to confirm it is online. You only need to do this once &mdash; the URL is saved automatically in your browser and remembered on every future visit.</p>
+      <p style="margin-bottom:20px;">After connecting the backend, upload your resume or career document in the <strong>Profile Setup</strong> panel. Job Scout will read it with AI and automatically populate your skill keywords, target companies, locations, and preferences. Your profile is also used to calculate a <strong>numeric match score (0&ndash;100)</strong> for every job lead, so you can instantly see which roles are worth pursuing.</p>
 
       <h3 style="font-family:'Orbitron',sans-serif;font-size:0.85rem;color:#1a3a6b;margin:0 0 8px;letter-spacing:0.08em;">STEP 2 &mdash; CONFIGURE YOUR SEARCH</h3>
       <p style="margin-bottom:8px;">Use the panels to tailor the search to your background and preferences before each mission:</p>
@@ -768,6 +915,8 @@ input[type="text"]::placeholder { color: #aab4c4; }
 
 </div>
 <script>
+var state_profile = null;
+
 var DEFAULTS = {
   companies: ['Adobe', 'OpenAI', 'Anthropic', 'Google', 'Microsoft', 'NVIDIA', 'Meta AI', 'Boeing', 'Newport News Shipbuilding HII', 'Northwestern Mutual', 'Onebrief BattleRoad', 'Tidewater Technical College'],
   skills: ['Generative AI', 'LLM', 'Multimedia', 'Python', 'FastAPI', 'Creative Technology', 'Computer Vision', 'Prompt Engineering'],
@@ -805,7 +954,8 @@ function loadState() {
         skills: parsed.skills || DEFAULTS.skills.slice(),
         locations: parsed.locations || DEFAULTS.locations.slice(),
         prefs: parsed.prefs || JSON.parse(JSON.stringify(DEFAULTS.prefs)),
-        sources: (parsed.sources && Array.isArray(parsed.sources)) ? parsed.sources : JSON.parse(JSON.stringify(DEFAULTS.sources))
+        sources: (parsed.sources && Array.isArray(parsed.sources)) ? parsed.sources : JSON.parse(JSON.stringify(DEFAULTS.sources)),
+        profile: parsed.profile || null
       };
     }
   } catch(e) {}
@@ -814,7 +964,8 @@ function loadState() {
     skills: DEFAULTS.skills.slice(),
     locations: DEFAULTS.locations.slice(),
     prefs: JSON.parse(JSON.stringify(DEFAULTS.prefs)),
-    sources: JSON.parse(JSON.stringify(DEFAULTS.sources))
+    sources: JSON.parse(JSON.stringify(DEFAULTS.sources)),
+    profile: null
   };
 }
 
@@ -880,6 +1031,255 @@ function addSource() {
 /* window.onload moved to end */
 
 
+
+function parseResume() {
+  var fileInput = document.getElementById('resume-file');
+  var statusEl = document.getElementById('profile-status');
+  var summaryBox = document.getElementById('profile-summary-box');
+  var badge = document.getElementById('profile-badge');
+
+  if (!fileInput.files || !fileInput.files[0]) {
+    statusEl.style.color = '#cc2222';
+    statusEl.textContent = 'Please select a file first.';
+    return;
+  }
+
+  var proxyUrl = (localStorage.getItem('cibola_proxy_url') || '').trim().replace(/\/$/, '');
+  if (!proxyUrl) {
+    statusEl.style.color = '#cc2222';
+    statusEl.textContent = 'Backend URL not set. Configure the Backend Config panel first.';
+    return;
+  }
+
+  var file = fileInput.files[0];
+  var isPdf = file.type === 'application/pdf' || file.name.toLowerCase().endsWith('.pdf');
+
+  statusEl.style.color = '#1a3fa8';
+  statusEl.textContent = 'Reading document...';
+  summaryBox.style.display = 'none';
+
+  var reader = new FileReader();
+  reader.onload = function(e) {
+    var result = e.target.result;
+    var payload = {};
+
+    if (isPdf) {
+      // base64 encode for PDF
+      var b64 = result.split(',')[1];
+      payload = { file_data: b64, file_type: 'pdf' };
+    } else {
+      // plain text
+      payload = { file_text: result, file_type: 'text' };
+    }
+
+    statusEl.textContent = 'Analyzing with AI... this may take 20-30 seconds.';
+
+    fetch(proxyUrl + '/parse-resume', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    })
+    .then(function(r) { return r.json(); })
+    .then(function(data) {
+      if (data.error) {
+        statusEl.style.color = '#cc2222';
+        statusEl.textContent = 'Error: ' + data.error + (data.detail ? ' — ' + data.detail : '');
+        return;
+      }
+
+      // Store profile in state
+      state.profile = data;
+      saveState();
+
+      // Auto-populate fields if extracted
+      if (data.companies && data.companies.length) {
+        state.companies = data.companies;
+        renderTags('company');
+      }
+      if (data.skills && data.skills.length) {
+        state.skills = data.skills;
+        renderTags('skill');
+      }
+      if (data.locations && data.locations.length) {
+        state.locations = data.locations;
+        renderTags('location');
+      }
+      if (data.prefs) {
+        Object.keys(data.prefs).forEach(function(k) {
+          if (state.prefs.hasOwnProperty(k)) state.prefs[k] = data.prefs[k];
+        });
+        renderPrefs();
+      }
+
+      saveState();
+
+      // Show summary
+      var summary = '<strong>' + (data.title || 'Profile loaded') + '</strong>';
+      if (data.experience_years) summary += ' &nbsp;&middot;&nbsp; ' + data.experience_years + ' yrs experience';
+      if (data.education) summary += ' &nbsp;&middot;&nbsp; ' + data.education;
+      if (data.special_status) summary += '<br>' + data.special_status;
+      summary += '<br><span style="color:#1a3a6b;">' + (data.candidate_summary || '') + '</span>';
+
+      summaryBox.innerHTML = summary;
+      summaryBox.style.display = 'block';
+      badge.style.display = 'inline';
+
+      statusEl.style.color = '#0e7a3a';
+      statusEl.textContent = 'Profile loaded. Fields populated. Scoring will now reflect your qualifications.';
+    })
+    .catch(function(err) {
+      statusEl.style.color = '#cc2222';
+      statusEl.textContent = 'Connection failed: ' + err.message;
+    });
+  };
+
+  if (isPdf) {
+    reader.readAsDataURL(file);
+  } else {
+    reader.readAsText(file);
+  }
+}
+
+function clearProfile() {
+  state.profile = null;
+  saveState();
+  document.getElementById('profile-status').textContent = 'Profile cleared.';
+  document.getElementById('profile-status').style.color = '#888';
+  document.getElementById('profile-summary-box').style.display = 'none';
+  document.getElementById('profile-badge').style.display = 'none';
+  document.getElementById('resume-file').value = '';
+}
+
+
+var activeDebugTab = 'prompt';
+var lastRawResponse = '';
+
+function toggleDebug() {
+  var panel = document.getElementById('debug-panel');
+  if (panel.classList.contains('visible')) {
+    panel.classList.remove('visible');
+  } else {
+    panel.classList.add('visible');
+    showTab(activeDebugTab);
+  }
+}
+
+function showTab(tab) {
+  activeDebugTab = tab;
+  var panel = document.getElementById('debug-panel');
+  panel.classList.add('visible');
+  ['prompt','validate','raw'].forEach(function(t) {
+    var el = document.getElementById('tab-' + t);
+    if (el) el.className = 'debug-tab' + (t === tab ? ' active' : '');
+  });
+  var content = document.getElementById('debug-content');
+  if (tab === 'prompt') {
+    var prompt = buildPrompt();
+    content.innerHTML = '<span class="head">FULL PROMPT SENT TO AI:</span>\n\n' + escapeHtml(prompt);
+  } else if (tab === 'validate') {
+    content.innerHTML = buildValidationReport();
+  } else if (tab === 'raw') {
+    if (lastRawResponse) {
+      content.innerHTML = '<span class="head">RAW AI RESPONSE:</span>\n\n' + escapeHtml(lastRawResponse);
+    } else {
+      content.innerHTML = '<span class="warn">No response yet. Run a mission first.</span>';
+    }
+  }
+}
+
+function escapeHtml(str) {
+  return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+function buildValidationReport() {
+  var lines = [];
+  lines.push('<span class="head">CONFIG VALIDATION REPORT</span>\n');
+
+  // Companies
+  lines.push('<span class="head">TARGET COMPANIES (' + state.companies.length + '):</span>');
+  state.companies.forEach(function(c) {
+    // Warn if very long (may confuse search) or contains special chars
+    if (c.length > 40) {
+      lines.push('  <span class="warn">&#9888; ' + escapeHtml(c) + ' — name is long, AI may abbreviate</span>');
+    } else {
+      lines.push('  <span class="ok">&#10003; ' + escapeHtml(c) + '</span>');
+    }
+  });
+
+  lines.push('\n<span class="head">SKILL KEYWORDS (' + state.skills.length + '):</span>');
+  state.skills.forEach(function(s) {
+    lines.push('  <span class="ok">&#10003; ' + escapeHtml(s) + '</span>');
+  });
+
+  lines.push('\n<span class="head">LOCATIONS (' + state.locations.length + '):</span>');
+  state.locations.forEach(function(l) {
+    var hasComma = l.indexOf(',') !== -1;
+    var hasFull = /\b(AL|AK|AZ|AR|CA|CO|CT|DE|FL|GA|HI|ID|IL|IN|IA|KS|KY|LA|ME|MD|MA|MI|MN|MS|MO|MT|NE|NV|NH|NJ|NM|NY|NC|ND|OH|OK|OR|PA|RI|SC|SD|TN|TX|UT|VT|VA|WA|WV|WI|WY|DC)\b/.test(l);
+    if (l.toLowerCase() === 'remote') {
+      lines.push('  <span class="ok">&#10003; ' + escapeHtml(l) + ' — remote flag active</span>');
+    } else if (!hasFull) {
+      lines.push('  <span class="warn">&#9888; ' + escapeHtml(l) + ' — no state abbreviation detected, AI may misinterpret</span>');
+    } else if (hasComma) {
+      lines.push('  <span class="warn">&#9888; ' + escapeHtml(l) + ' — comma format OK but AI handles both formats fine</span>');
+    } else {
+      lines.push('  <span class="ok">&#10003; ' + escapeHtml(l) + ' — CITY ST format recognized</span>');
+    }
+  });
+
+  lines.push('\n<span class="head">JOB SEARCH SOURCES (' + state.sources.filter(function(s){return s.active;}).length + ' active):</span>');
+  state.sources.forEach(function(s) {
+    if (s.active) {
+      lines.push('  <span class="ok">&#10003; ' + escapeHtml(s.name) + '</span>');
+    } else {
+      lines.push('  <span class="warn">  (off) ' + escapeHtml(s.name) + '</span>');
+    }
+  });
+
+  lines.push('\n<span class="head">SEARCH PREFERENCES:</span>');
+  Object.keys(state.prefs).forEach(function(k) {
+    if (state.prefs[k]) {
+      lines.push('  <span class="ok">&#10003; ' + escapeHtml(k) + '</span>');
+    } else {
+      lines.push('  <span class="warn">  (off) ' + escapeHtml(k) + '</span>');
+    }
+  });
+
+  lines.push('\n<span class="head">PROFILE STATUS:</span>');
+  if (state.profile && state.profile.candidate_summary) {
+    lines.push('  <span class="ok">&#10003; Profile loaded: ' + escapeHtml(state.profile.title || '') + '</span>');
+    lines.push('  <span class="ok">  Numeric scoring: ACTIVE (0-100)</span>');
+    if (state.profile.scoring_profile && state.profile.scoring_profile.must_have_skills) {
+      lines.push('  Must-have skills: ' + state.profile.scoring_profile.must_have_skills.map(escapeHtml).join(', '));
+    }
+  } else {
+    lines.push('  <span class="warn">&#9888; No profile loaded. Scoring will use HOT/WARM/COLD only.</span>');
+    lines.push('  <span class="warn">  Upload a resume in the Profile Setup panel to enable numeric scoring.</span>');
+  }
+
+  lines.push('\n<span class="head">BACKEND:</span>');
+  var url = localStorage.getItem('cibola_proxy_url') || '';
+  if (url) {
+    lines.push('  <span class="ok">&#10003; ' + escapeHtml(url) + '</span>');
+  } else {
+    lines.push('  <span class="err">&#10007; No backend URL set — missions will fail.</span>');
+  }
+
+  lines.push('\n<span class="head">LOCATION FORMAT NOTE:</span>');
+  lines.push('  "North Charleston SC" and "North Charleston, SC" both work fine.');
+  lines.push('  The AI understands both formats. No commas required.');
+  lines.push('\n<span class="head">COMPANY NAME NOTE:</span>');
+  lines.push('  "Newport News Shipbuilding HII" — the AI knows this company and will');
+  lines.push('  search for it correctly. HII is the parent company (Huntington Ingalls).');
+  lines.push('  If no results come back for a company, it may not be actively hiring');
+  lines.push('  or the AI could not find current postings on its career page.');
+
+  return lines.join('\n');
+}
+
+function validateConfig() {
+  showTab('validate');
+}
+
 function saveProxyUrl() {
   var val = document.getElementById('proxy-input').value.trim().replace(/\/$/, '');
   if (!val) return;
@@ -901,7 +1301,7 @@ function testProxy() {
     })
     .catch(function(){
       document.getElementById('proxy-status').style.color='#cc2222';
-      document.getElementById('proxy-status').textContent='CONNECTION FAILED // Check ngrok URL or restart Colab.';
+      document.getElementById('proxy-status').textContent='CONNECTION FAILED // Check your Hugging Face Space URL and confirm the Space is running.';
     });
 }
 
@@ -1015,7 +1415,31 @@ function stopLoadingMessages() { clearInterval(loadingMsgInterval); }
 
 function buildPrompt() {
   var activePrefs = Object.keys(state.prefs).filter(function(k) { return state.prefs[k]; }).join(', ');
-  return 'You are an expert job search intelligence agent helping a highly specialized candidate find ideal job opportunities.\n\nCANDIDATE PROFILE:\n- Title: Hybrid AI and Multimedia Developer\n- Location: Summerville/Charleston SC. Strongly prefers remote or local SC work.\n- Background: 20+ years multimedia production (Navy Combat Camera photojournalist), 15+ years AI\n- Key Skills: Generative AI (LangChain, LangGraph, RAG, FAISS), Python, FastAPI, Streamlit, Groq LLMs, D-ID avatars, Adobe CC, 3D animation (iClone, Blender, Maya), FLUX image generation, comic/narrative AI, React, GitHub Pages\n- Portfolio: davidfliesen.github.io\n- Notable work: AHA Healthcare AI agent, InsightForge BI dashboard, Aladdin News Genie, Sisters of Summerville daily AI comic strip, ComicsGen app\n- Education: Purdue Applied Generative AI Specialization, BFA Media Arts\n- Special status: Disabled Veteran. Work-from-home strongly preferred. Paid travel acceptable. NOT willing to relocate.\n\nSEARCH TARGETS:\nCompanies: ' + state.companies.join(', ') + '\nSkills/Keywords: ' + state.skills.join(', ') + '\nLocations Acceptable: ' + state.locations.join(', ') + '\nActive Job Sources: ' + state.sources.filter(function(s){return s.active;}).map(function(s){return s.name;}).join(', ') + '\nActive Preferences: ' + activePrefs + '\n\nMISSION: Search the web RIGHT NOW for current open job postings (posted in the last 30-60 days) matching this profile. Look at each company careers page, LinkedIn, Indeed, and job boards. Find 5-10 strong matches.\n\nCRITICAL: Respond ONLY with a valid JSON object. No markdown, no backticks, no preamble. Use this exact format:\n{\n  "summary": "2-3 sentence executive summary of todays opportunity landscape",\n  "scan_timestamp": "ISO timestamp",\n  "leads": [\n    {\n      "title": "Job Title",\n      "company": "Company Name",\n      "location": "Location or Remote",\n      "work_mode": "Remote or Hybrid or On-site",\n      "match_score": "HOT or WARM or COLD",\n      "match_reason": "1-2 sentences why this fits the candidates background",\n      "summary": "2-3 sentence description of the role",\n      "skill_tags": ["tag1", "tag2"],\n      "veteran_friendly": true,\n      "apply_url": "direct URL to job posting or careers page",\n      "source": "LinkedIn or Indeed or Company Careers"\n    }\n  ]\n}';
+  var profileSection = '';
+  if (state.profile && state.profile.candidate_summary) {
+    var p = state.profile;
+    profileSection = 'CANDIDATE PROFILE (from uploaded resume):\n';
+    profileSection += '- Summary: ' + (p.candidate_summary || '') + '\n';
+    profileSection += '- Title: ' + (p.title || '') + '\n';
+    profileSection += '- Experience: ' + (p.experience_years || '') + ' years\n';
+    profileSection += '- Education: ' + (p.education || '') + '\n';
+    if (p.special_status) profileSection += '- Special Status: ' + p.special_status + '\n';
+    if (p.scoring_profile) {
+      profileSection += '- Must-Have Skills: ' + (p.scoring_profile.must_have_skills || []).join(', ') + '\n';
+      profileSection += '- Nice-to-Have: ' + (p.scoring_profile.nice_to_have_skills || []).join(', ') + '\n';
+      if (p.scoring_profile.deal_breakers && p.scoring_profile.deal_breakers.length) {
+        profileSection += '- Deal Breakers: ' + p.scoring_profile.deal_breakers.join(', ') + '\n';
+      }
+    }
+  } else {
+    profileSection = 'CANDIDATE PROFILE:\n- Skills and background as described in keywords below.\n';
+  }
+
+  var scoringInstruction = state.profile && state.profile.scoring_profile
+    ? 'SCORING: Score each lead 0-100 based on match to the candidate profile above. Must-have skills each contribute up to 15 points. Nice-to-have skills contribute up to 5 points each. Location/remote fit contributes up to 10 points. Industry alignment contributes up to 10 points. 75-100 = HOT, 50-74 = WARM, 0-49 = COLD. Include a score_breakdown explaining the numeric score.'
+    : 'SCORING: Score each lead as HOT (strong match), WARM (good fit), or COLD (partial match) based on how well it matches the candidate skills and preferences.';
+
+  return 'You are an expert job search intelligence agent.\n\n' + profileSection + '\nSEARCH TARGETS:\nCompanies: ' + state.companies.join(', ') + '\nSkills/Keywords: ' + state.skills.join(', ') + '\nLocations Acceptable: ' + state.locations.join(', ') + '\nActive Job Sources: ' + state.sources.filter(function(s){return s.active;}).map(function(s){return s.name;}).join(', ') + '\nActive Preferences: ' + activePrefs + '\n\n' + scoringInstruction + '\n\nMISSION: Search the web RIGHT NOW for current open job postings (posted in the last 30-60 days) matching this profile. Find 5-10 strong matches.\n\nCRITICAL: Respond ONLY with a valid JSON object. No markdown, no backticks, no preamble. Use this exact format:\n{\n  "summary": "2-3 sentence executive summary of todays opportunity landscape",\n  "scan_timestamp": "ISO timestamp",\n  "leads": [\n    {\n      "title": "Job Title",\n      "company": "Company Name",\n      "location": "Location or Remote",\n      "work_mode": "Remote or Hybrid or On-site",\n      "match_score": "HOT or WARM or COLD",\n      "numeric_score": 85,\n      "score_breakdown": "Brief explanation of numeric score",\n      "match_reason": "1-2 sentences why this fits the candidates background",\n      "summary": "2-3 sentence description of the role",\n      "skill_tags": ["tag1", "tag2"],\n      "veteran_friendly": true,\n      "apply_url": "direct URL to job posting or careers page",\n      "source": "LinkedIn or Indeed or Company Careers"\n    }\n  ]\n}';
 }
 
 function launchScout() {
@@ -1031,7 +1455,7 @@ function launchScout() {
   if (!proxyUrl) {
     stopLoadingMessages();
     document.getElementById('loading-frame').classList.remove('visible');
-    setStatus('error', 'MISSION FAULT // No backend URL set. Paste your ngrok URL in the BACKEND CONFIG panel above.');
+    setStatus('error', 'MISSION FAULT // No backend URL set. Paste your Hugging Face Space URL in the BACKEND CONFIG panel above.');
     btn.disabled = false;
     return;
   }
@@ -1044,7 +1468,9 @@ function launchScout() {
   .then(function(data) {
     var elapsed = ((Date.now() - startTime) / 1000).toFixed(1);
     // Backend now returns parsed JSON directly, or an error object
-    document.getElementById('raw-log').textContent = JSON.stringify(data, null, 2);
+    var rawStr = JSON.stringify(data, null, 2);
+    document.getElementById('raw-log').textContent = rawStr;
+    lastRawResponse = rawStr;
     if (data.error) {
       throw new Error(data.error + (data.detail ? ' // ' + data.detail : '') + (data.raw_preview ? ' // RAW: ' + data.raw_preview : ''));
     }
@@ -1072,6 +1498,8 @@ function renderResults(data, elapsed) {
   section.style.display = 'block';
   document.getElementById('summary-panel').style.display = '';
   document.getElementById('results-panel').style.display = '';
+  var legendEl = document.getElementById('score-legend');
+  if (legendEl) legendEl.style.display = 'flex';
   document.getElementById('summary-text').textContent = data.summary || 'No summary available.';
   var leads = data.leads || [];
   document.getElementById('lead-count').textContent = leads.length;
@@ -1084,7 +1512,12 @@ function renderResults(data, elapsed) {
   }
   for (var i = 0; i < leads.length; i++) {
     (function(job, idx) {
-      var scoreClass = job.match_score === 'HOT' ? 'score-hot' : job.match_score === 'WARM' ? 'score-warm' : 'score-cold';
+      var matchScore = job.match_score || 'COLD';
+    var numScore = job.numeric_score || null;
+    var scoreClass = matchScore === 'HOT' ? 'score-hot' : matchScore === 'WARM' ? 'score-warm' : 'score-cold';
+    var barClass = matchScore === 'HOT' ? 'hot' : matchScore === 'WARM' ? 'warm' : 'cold';
+    var scoreDisplay = numScore !== null ? String(numScore) : matchScore;
+    var scoreNumClass = matchScore === 'HOT' ? 'hot' : matchScore === 'WARM' ? 'warm' : 'cold';
       var skillTagsHTML = '';
       if (job.skill_tags) {
         for (var t = 0; t < job.skill_tags.length; t++) {
@@ -1103,13 +1536,15 @@ function renderResults(data, elapsed) {
             '<div class="job-title">' + num + ' // ' + (job.title || 'Untitled Role') + '</div>' +
             '<div class="job-company">&#9672; ' + (job.company || 'Unknown') + ' &nbsp;|&nbsp; ' + (job.location || 'See posting') + '</div>' +
           '</div>' +
-          '<div class="score-badge ' + scoreClass + '">' + (job.match_score || '') + '</div>' +
+          '<div class="score-num ' + scoreNumClass + '">' + scoreDisplay + '</div>' +
         '</div>' +
         '<div class="job-meta">' +
           '<div class="job-meta-item"><span class="icon">MODE: </span>' + (job.work_mode || 'See posting') + '</div>' +
           '<div class="job-meta-item"><span class="icon">SRC: </span>' + (job.source || 'Web') + '</div>' +
         '</div>' +
         '<div class="job-tags">' + skillTagsHTML + vetTag + '</div>' +
+        (numScore !== null ? '<div class="score-bar-wrap"><div class="score-bar ' + barClass + '" style="width:' + Math.min(numScore,100) + '%"></div></div>' +
+          (job.score_breakdown ? '<div style="font-family:\'Share Tech Mono\',monospace;font-size:0.72rem;color:#718096;margin-bottom:8px;">SCORE: ' + job.score_breakdown + '</div>' : '') : '') +
         '<div class="job-summary">' + (job.summary || '') + '</div>' +
         (job.match_reason ? '<div class="job-why">WHY THIS FITS: ' + job.match_reason + '</div>' : '') +
         '<div class="job-actions">' +
@@ -1404,6 +1839,23 @@ window.onload = function() {
     proxyInput.value = savedUrl;
     document.getElementById('proxy-status').style.color = '#8a5c00';
     document.getElementById('proxy-status').textContent = 'BACKEND URL LOADED // ' + savedUrl;
+  }
+  // Restore profile badge if profile is loaded
+  if (state.profile && state.profile.candidate_summary) {
+    var badge = document.getElementById('profile-badge');
+    if (badge) badge.style.display = 'inline';
+    var summaryBox = document.getElementById('profile-summary-box');
+    if (summaryBox) {
+      var p = state.profile;
+      var summary = '<strong>' + (p.title || 'Profile loaded') + '</strong>';
+      if (p.experience_years) summary += ' &nbsp;&middot;&nbsp; ' + p.experience_years + ' yrs experience';
+      if (p.education) summary += ' &nbsp;&middot;&nbsp; ' + p.education;
+      summary += '<br><span style="color:#1a3a6b;">' + (p.candidate_summary || '') + '</span>';
+      summaryBox.innerHTML = summary;
+      summaryBox.style.display = 'block';
+    }
+    var statusEl = document.getElementById('profile-status');
+    if (statusEl) { statusEl.style.color = '#0e7a3a'; statusEl.textContent = 'Profile active. Scoring reflects your qualifications.'; }
   }
 };
 
